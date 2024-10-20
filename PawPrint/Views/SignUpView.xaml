@@ -10,7 +10,6 @@
     Shell.NavBarIsVisible="False">
 
     <ScrollView>
-
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -204,9 +203,6 @@
                     TextColor="Black" />
 
             </VerticalStackLayout>
-
         </Grid>
-
     </ScrollView>
-
 </ContentPage>
