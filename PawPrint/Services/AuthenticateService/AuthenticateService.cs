@@ -1,0 +1,32 @@
+﻿using PawPrint.Models;
+using System.Net.Http.Json;
+
+namespace PawPrint.Services.AuthenticateService;
+
+public class AuthenticateService : IAuthenticateService
+{
+    private HttpClient _httpClient { get; }
+
+    public AuthenticateService(HttpClient httpClient)
+    {
+        httpClient.BaseAddress = new Uri("http://10.0.2.2:8000/");
+        _httpClient = httpClient;
+    }
+
+    public async Task<Owner> GetOwnerByNICAsync(string nic)
+    {
+        try
+        {
+            var response = await _httpClient.GetAsync($"registered_owners/{nic}");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<Owner>();
+            }
+            return null;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+    }
+}

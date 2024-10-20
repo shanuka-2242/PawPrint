@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PawPrint.Views.HomeView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:PawPrint.CustomControls"
+    xmlns:vm="clr-namespace:PawPrint.ViewModels"
+    x:DataType="vm:HomeViewModel"
+    Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="15" Spacing="10">
+
+            <ImageButton
+                Margin="0,10,10,0"
+                BackgroundColor="Transparent"
+                Command="{Binding LogOutCommand}"
+                HeightRequest="25"
+                HorizontalOptions="End"
+                Source="logout.png"
+                WidthRequest="25" />
+
+            <Label
+                Margin="0,10,0,0"
+                FontFamily="SignikaSemiBold"
+                FontSize="25"
+                Text="Register your Dog" />
+
+            <HorizontalStackLayout Margin="0,30,0,0" Spacing="20">
+
+                <Label
+                    FontFamily="SignikaMedium"
+                    FontSize="15"
+                    Text="Attach your dog's Image"
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+
+                <Button
+                    Padding="10"
+                    BackgroundColor="{StaticResource PawPrintGreen}"
+                    Command="{Binding AttachDogImageCommand}"
+                    CornerRadius="5"
+                    FontFamily="SignikaMedium"
+                    FontSize="17"
+                    Text="Attach Image"
+                    TextColor="White" />
+            </HorizontalStackLayout>
+
+            <Label
+                Margin="0,8,0,0"
+                FontFamily="SignikaRegular"
+                FontSize="15"
+                Text="{Binding DogImageName}"
+                TextColor="DimGrey"
+                VerticalOptions="Center" />
+
+            <Frame
+                Margin="0,8,0,0"
+                Padding="5"
+                BackgroundColor="White"
+                BorderColor="DimGray"
+                CornerRadius="5">
+
+                <local:CustomEntry
+                    FontFamily="SignikaSemiBold"
+                    FontSize="15"
+                    Placeholder="Dog's Name"
+                    PlaceholderColor="DimGray"
+                    Text="{Binding RegisteredDog.Name}"
+                    TextColor="Black" />
+            </Frame>
+
+            <Frame
+                Margin="0,8,0,0"
+                Padding="5"
+                BackgroundColor="White"
+                BorderColor="DimGray"
+                CornerRadius="5">
+
+                <local:CustomEntry
+                    FontFamily="SignikaSemiBold"
+                    FontSize="15"
+                    Placeholder="Breed"
+                    PlaceholderColor="DimGray"
+                    Text="{Binding RegisteredDog.Breed}"
+                    TextColor="Black" />
+            </Frame>
+
+            <Frame
+                Margin="0,8,0,0"
+                Padding="5"
+                BackgroundColor="White"
+                BorderColor="DimGray"
+                CornerRadius="5">
+
+                <local:CustomEntry
+                    FontFamily="SignikaSemiBold"
+                    FontSize="15"
+                    Placeholder="Age"
+                    PlaceholderColor="DimGray"
+                    Text="{Binding RegisteredDog.Age}"
+                    TextColor="Black" />
+            </Frame>
+
+            <HorizontalStackLayout Margin="0,8,0,0" Spacing="20">
+
+                <Label
+                    FontFamily="SignikaMedium"
+                    FontSize="15"
+                    Text="Attach your dog's nose Image"
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+
+                <Button
+                    Padding="10"
+                    BackgroundColor="{StaticResource PawPrintGreen}"
+                    Command="{Binding AttachDogNoseImageCommand}"
+                    CornerRadius="5"
+                    FontFamily="SignikaMedium"
+                    FontSize="17"
+                    Text="Attach Image"
+                    TextColor="White" />
+            </HorizontalStackLayout>
+
+            <Label
+                Margin="0,8,0,0"
+                FontFamily="SignikaRegular"
+                FontSize="15"
+                Text="{Binding DogNoseImageName}"
+                TextColor="DimGrey"/>
+
+            <Button
+                Margin="0,20,0,0"
+                Padding="10"
+                BackgroundColor="{StaticResource PawPrintGreen}"
+                Command="{Binding RegisterDogCommand}"
+                CornerRadius="5"
+                FontFamily="SignikaMedium"
+                FontSize="17"
+                Text="Register"
+                TextColor="White" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

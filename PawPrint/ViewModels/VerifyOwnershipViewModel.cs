@@ -40,11 +40,12 @@ public partial class VerifyOwnershipViewModel : ObservableObject
     {
         try
         {
-            SelectedImageFile = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
-            {
-                Title = "Select a dog's nose image",
-            });
+            //SelectedImageFile = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
+            //{
+            //    Title = "Select a dog's nose image",
+            //});
 
+            SelectedImageFile = await MediaPicker.PickPhotoAsync();
             if (SelectedImageFile != null)
             {
                 IsEnabled = true;
@@ -54,7 +55,7 @@ public partial class VerifyOwnershipViewModel : ObservableObject
         }
         catch (Exception)
         {
-            await _dialogService.ShowAlertAsync("Sorry!", "Error occured while selecting an Image.", "OK");
+            await _dialogService.ShowAlertAsync("Information", "Error occured while selecting an Image.", "OK");
         }
     }
 
@@ -74,7 +75,7 @@ public partial class VerifyOwnershipViewModel : ObservableObject
             var result = await _verifyOwnershipService.GetOwnerVerifiedInfoAsync(content);
             if (result == null)
             {
-                await _dialogService.ShowAlertAsync("Sorry!", "No dog is recorded in our database with this biometric.", "OK");
+                await _dialogService.ShowAlertAsync("Information", "No dog is recorded in our database with this biometric.", "OK");
             }
             else
             {
@@ -83,7 +84,7 @@ public partial class VerifyOwnershipViewModel : ObservableObject
         }
         catch (Exception)
         {
-            await _dialogService.ShowAlertAsync("Sorry!", "Error occured while selecting an Image.", "OK");
+            await _dialogService.ShowAlertAsync("Information", "Error occured while selecting an Image.", "OK");
         }
     }
 }

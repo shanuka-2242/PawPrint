@@ -63,6 +63,7 @@
 	  <None Remove="Resources\Fonts\Signika-SemiBold.ttf" />
 	  <None Remove="Resources\Images\applogo.png" />
 	  <None Remove="Resources\Images\arrow_back_ios.png" />
+	  <None Remove="Resources\Images\logout.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -74,6 +75,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\HomeView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

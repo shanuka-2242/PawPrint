@@ -16,7 +16,7 @@ public class VerifyOwnershipService : IVerifyOwnershipService
     {
         try
         {
-            var response = await _httpClient.PostAsync("verify-ownership", content);
+            var response = await _httpClient.PostAsync("verify_ownership", content);
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadFromJsonAsync<VerifiedInfomation>();
