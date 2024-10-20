@@ -3,7 +3,8 @@
     x:Class="PawPrint.Views.WelcomeView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="WelcomeView"
+    xmlns:vm="clr-namespace:PawPrint.ViewModels"
+    x:DataType="vm:WelcomeViewModel"
     BackgroundColor="White"
     Shell.NavBarIsVisible="False">
 
@@ -41,7 +42,7 @@
                 FontFamily="SignikaRegular"
                 FontSize="15"
                 HorizontalOptions="Center"
-                Text="Start your journey with our AI-powered, Dog Biomentric Used Ownership Identification and Verification System."
+                Text="Start your journey with our AI-powered, dog biometric-used ownership identification and verification system."
                 TextColor="Black" />
 
             <!--  Dog Register Button  -->
@@ -49,12 +50,12 @@
                 Margin="0,20,0,0"
                 Padding="10"
                 BackgroundColor="{StaticResource PawPrintGreen}"
+                Command="{Binding RegisterCommand}"
                 CornerRadius="5"
                 FontFamily="SignikaMedium"
                 FontSize="17"
                 Text="Register Your Dog"
-                TextColor="White"
-                Clicked="OnRegisterClicked"/>
+                TextColor="White" />
 
             <!--  Prove Ownership Button  -->
             <Button
@@ -63,6 +64,7 @@
                 BackgroundColor="Transparent"
                 BorderColor="{StaticResource PawPrintGreen}"
                 BorderWidth="2"
+                Command="{Binding VerifyCommand}"
                 CornerRadius="5"
                 FontFamily="SignikaMedium"
                 FontSize="17"
@@ -73,13 +75,12 @@
 
         <!--  All right reserved lable  -->
         <Label
-            x:Name="copyNoticeLable"
             Grid.Row="1"
             Margin="0,0,0,6"
             FontFamily="SignikaSemiBold"
             FontSize="13."
             HorizontalOptions="Center"
-            Text="Initial Text"
+            Text="{Binding CopyrightText}"
             TextColor="Black" />
 
     </Grid>

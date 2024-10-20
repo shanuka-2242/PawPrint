@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PawPrint.CustomControls"
-    Title="LoginView"
+    xmlns:vm="clr-namespace:PawPrint.ViewModels"
+    x:DataType="vm:LoginViewModel"
     BackgroundColor="White"
     Shell.NavBarIsVisible="False">
 
@@ -19,9 +20,18 @@
             Padding="15"
             Spacing="10">
 
+            <ImageButton
+                Margin="10,10,0,0"
+                BackgroundColor="Transparent"
+                Command="{Binding GoBackCommand}"
+                HeightRequest="24"
+                HorizontalOptions="Start"
+                Source="arrow_back_ios.png"
+                WidthRequest="24" />
+
             <!--  Logo Image  -->
             <Image
-                Margin="0,12,0,0"
+                Margin="0,0,0,0"
                 Aspect="AspectFill"
                 HeightRequest="250"
                 HorizontalOptions="Center"
@@ -92,6 +102,7 @@
                     Padding="0"
                     BackgroundColor="Transparent"
                     BorderWidth="0"
+                    Command="{Binding GoToSignUpPageCommand}"
                     FontFamily="SignikaMedium"
                     Text="SignUp"
                     TextColor="{StaticResource PawPrintGreen}"
@@ -102,13 +113,12 @@
 
         <!--  All right reserved lable  -->
         <Label
-            x:Name="copyNoticeLable"
             Grid.Row="1"
             Margin="0,0,0,6"
             FontFamily="SignikaSemiBold"
             FontSize="13."
             HorizontalOptions="Center"
-            Text="Initial Text"
+            Text="{Binding CopyrightText}"
             TextColor="Black" />
 
     </Grid>

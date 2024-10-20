@@ -2,9 +2,9 @@ using PawPrint.ViewModels;
 
 namespace PawPrint.Views;
 
-public partial class WelcomeView : ContentPage
+public partial class VerifyOwnershipView : ContentPage
 {
-    public WelcomeView(WelcomeViewModel viewModel)
+    public VerifyOwnershipView(VerifyOwnershipViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;

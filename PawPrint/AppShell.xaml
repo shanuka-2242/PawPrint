@@ -10,6 +10,6 @@
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:WelcomeView}"
-        Route="SignUpView" />
+        Route="WelcomeView" />
 
 </Shell>

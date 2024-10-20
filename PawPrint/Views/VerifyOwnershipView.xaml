@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PawPrint.Views.VerifyOwnershipView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:PawPrint.ViewModels"
+    x:DataType="vm:VerifyOwnershipViewModel"
+    BackgroundColor="White"
+    Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+
+        <VerticalStackLayout Padding="15" Spacing="10">
+
+            <ImageButton
+                Margin="10,10,0,0"
+                BackgroundColor="Transparent"
+                Command="{Binding GoBackCommand}"
+                HeightRequest="24"
+                HorizontalOptions="Start"
+                Source="arrow_back_ios.png"
+                WidthRequest="24" />
+
+            <!--  Display the Selected Image  -->
+            <Frame
+                Margin="0,15,0,0"
+                Padding="5"
+                BackgroundColor="Transparent"
+                BorderColor="Gray"
+                CornerRadius="5"
+                HorizontalOptions="Center">
+
+                <Image
+                    Aspect="AspectFit"
+                    BackgroundColor="Transparent"
+                    HeightRequest="200"
+                    Source="{Binding SelectedImageSource}"
+                    WidthRequest="200" />
+            </Frame>
+
+            <Label
+                Margin="0,20,0,0"
+                FontFamily="SignikaRegular"
+                FontSize="15"
+                HorizontalOptions="Center"
+                Text="Please choose a picture of a dog's nose from the gallery to find out who owns it."
+                TextColor="Black" />
+
+            <!--  Button to Select Image  -->
+            <Button
+                Margin="0,25,0,0"
+                Padding="10"
+                BackgroundColor="Transparent"
+                BorderColor="{StaticResource PawPrintGreen}"
+                BorderWidth="2"
+                Command="{Binding SelectImageCommand}"
+                CornerRadius="5"
+                FontFamily="SignikaMedium"
+                FontSize="17"
+                Text="Select An Image"
+                TextColor="{StaticResource PawPrintGreen}" />
+
+            <!--  Button to Vrify Ownership  -->
+            <Button
+                Margin="0,5,0,0"
+                Padding="10"
+                BackgroundColor="{StaticResource PawPrintGreen}"
+                Command="{Binding VerifyOwnershipCommand}"
+                CornerRadius="5"
+                FontFamily="SignikaMedium"
+                FontSize="17"
+                IsEnabled="{Binding IsEnabled}"
+                Text="Verify Ownership"
+                TextColor="White" />
+
+            <TableView Intent="Data">
+                <TableRoot>
+                    <TableSection Title="Ownership Information">
+                        <TextCell Detail="{Binding VerifiedInfomation.DogName}" Text="Dog's Name" />
+                        <TextCell Detail="{Binding VerifiedInfomation.Breed}" Text="Dog's Breed" />
+                        <TextCell Detail="{Binding VerifiedInfomation.Age}" Text="Dog's Age" />
+                        <TextCell Detail="{Binding VerifiedInfomation.NIC}" Text="Owner's NIC" />
+                        <TextCell Detail="{Binding VerifiedInfomation.FullName}" Text="Owner's Full Name" />
+                        <TextCell Detail="{Binding VerifiedInfomation.Phone}" Text="Owner's Phone" />
+                        <TextCell Detail="{Binding VerifiedInfomation.Email}" Text="Owner's Email" />
+                        <TextCell Detail="{Binding VerifiedInfomation.CurrentAddress}" Text="Owner's Current Address" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
