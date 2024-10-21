@@ -168,7 +168,8 @@
                     FontFamily="SignikaMedium"
                     FontSize="17"
                     Text="SignUp"
-                    TextColor="White" />
+                    TextColor="White"
+                    Command="{Binding SignUpCommand}"/>
 
                 <HorizontalStackLayout
                     Margin="0,0,0,20"

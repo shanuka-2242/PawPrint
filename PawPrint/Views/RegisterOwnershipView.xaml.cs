@@ -2,9 +2,9 @@ using PawPrint.ViewModels;
 
 namespace PawPrint.Views;
 
-public partial class HomeView : ContentPage
+public partial class RegisterOwnershipView : ContentPage
 {
-    public HomeView(HomeViewModel viewModel)
+    public RegisterOwnershipView(RegisterOwnershipViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;

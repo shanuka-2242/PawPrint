@@ -7,9 +7,29 @@
     Title="PawPrint"
     Shell.FlyoutBehavior="Disabled">
 
+    <!--  WelcomeView  -->
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:HomeView}"
+        ContentTemplate="{DataTemplate local:WelcomeView}"
         Route="WelcomeView" />
+
+    <!--  LoginView  -->
+    <ShellContent
+        ContentTemplate="{DataTemplate local:LoginView}"
+        Route="LoginView" />
+
+    <!--  SignUpView  -->
+    <ShellContent
+        ContentTemplate="{DataTemplate local:SignUpView}"
+        Route="SignUpView" />
+
+    <!--  RegisterOwnershipView  -->
+    <ShellContent
+        ContentTemplate="{DataTemplate local:RegisterOwnershipView}"
+        Route="RegisterOwnershipView" />
+
+    <!--  VerifyOwnershipView  -->
+    <ShellContent
+        ContentTemplate="{DataTemplate local:VerifyOwnershipView}"
+        Route="VerifyOwnershipView" />
 
 </Shell>

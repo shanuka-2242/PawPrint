@@ -5,7 +5,7 @@ using PawPrint.Views;
 
 namespace PawPrint.ViewModels;
 
-public partial class HomeViewModel : ObservableObject
+public partial class RegisterOwnershipViewModel : ObservableObject
 {
     [ObservableProperty]
     private Dog registeredDog;

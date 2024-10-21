@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PawPrint.Views;
 
 namespace PawPrint.ViewModels;
 
@@ -22,5 +23,11 @@ public partial class SignUpViewModel : ObservableObject
     async Task GoBack()
     {
         await Shell.Current.GoToAsync("..");
+    }
+
+    [RelayCommand]
+    async Task SignUp()
+    {
+        await Shell.Current.GoToAsync($"//{nameof(RegisterOwnershipView)}");
     }
 }

@@ -56,7 +56,7 @@ public partial class LoginViewModel : ObservableObject
                 {
                     if (EnteredPassword == loggedinUser.Password)
                     {
-                        await Shell.Current.GoToAsync(nameof(HomeView));
+                        await Shell.Current.GoToAsync($"//{nameof(RegisterOwnershipView)}");
                     }
                     else
                     {

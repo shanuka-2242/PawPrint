@@ -75,7 +75,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\HomeView.xaml">
+	  <Compile Update="Views\RegisterOwnershipView.xaml.cs">
+	    <DependentUpon>RegisterOwnershipView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\RegisterOwnershipView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginView.xaml">
