@@ -156,11 +156,11 @@
                         <Frame
                             Grid.Row="4"
                             Grid.Column="1"
+                            Margin="0,15,0,0"
                             Padding="5"
                             BackgroundColor="Transparent"
                             BorderColor="Gray"
-                            CornerRadius="5"
-                            Margin="0,15,0,0">
+                            CornerRadius="5">
 
                             <Image
                                 Aspect="AspectFit"

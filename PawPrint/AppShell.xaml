@@ -7,7 +7,7 @@
     Title="PawPrint"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent ContentTemplate="{DataTemplate local:VerifyOwnershipView}" Route="RegisterOwnershipView" />
+    <ShellContent ContentTemplate="{DataTemplate local:VerifyOwnershipView}" Route="VerifyOwnershipView" />
 
     <!--  WelcomeView  -->
     <!--

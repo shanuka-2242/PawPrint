@@ -1,36 +1,47 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using PawPrint.Models;
 using PawPrint.Services.DialogService;
+using PawPrint.Services.RegisterOwnershipService;
 using PawPrint.Views;
+using System.Net.Http.Headers;
 
 namespace PawPrint.ViewModels;
 
 public partial class RegisterOwnershipViewModel : ObservableObject
 {
     private readonly IDialogService _dialogService;
+    private readonly IRegisterOwnershipService _registerOwnershipService;
 
-    public RegisterOwnershipViewModel(IDialogService dialogService)
+    public RegisterOwnershipViewModel(IDialogService dialogService, IRegisterOwnershipService registerOwnershipService)
     {
+        _registerOwnershipService = registerOwnershipService;
         _dialogService = dialogService;
     }
 
-    [ObservableProperty]
-    private Dog registeredDog;
+    #region Required Property List
+
+    public Stream DogImage { get; set; }
+
+    public Stream NoseImage { get; set; }
 
     [ObservableProperty]
-    private FileResult selectedDogImage;
+    public string noseImageName;
 
     [ObservableProperty]
-    private string selectedDogImageName;
+    public string dogImageName;
 
     [ObservableProperty]
-    private FileResult selectedDogNoseImage;
+    public string dogName;
 
     [ObservableProperty]
-    private string selectedDogNoseImageName;
+    public string breed;
 
-    private string nic = "2000";
+    [ObservableProperty]
+    public string age;
+
+    public string NIC { get; set; } = "2000";
+
+    #endregion
 
     [RelayCommand]
     async Task LogOut()
@@ -43,10 +54,11 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     {
         try
         {
-            SelectedDogImage = await MediaPicker.PickPhotoAsync();
+            var SelectedDogImage = await MediaPicker.PickPhotoAsync();
             if (SelectedDogImage != null)
             {
-                SelectedDogImageName = $"Image - {SelectedDogImage.FileName}";
+                DogImageName = $"Image - {SelectedDogImage.FileName}";
+                DogImage = await SelectedDogImage.OpenReadAsync();
             }
         }
         catch (Exception)
@@ -60,10 +72,11 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     {
         try
         {
-            SelectedDogNoseImage = await MediaPicker.PickPhotoAsync();
+            var SelectedDogNoseImage = await MediaPicker.PickPhotoAsync();
             if (SelectedDogNoseImage != null)
             {
-                SelectedDogNoseImageName = $"Image - {SelectedDogNoseImage.FileName}";
+                NoseImageName = $"Image - {SelectedDogNoseImage.FileName}";
+                NoseImage = await SelectedDogNoseImage.OpenReadAsync();
             }
         }
         catch (Exception)
@@ -77,7 +90,39 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     {
         try
         {
+            if (DogName != null || Age != null || Breed != null
+                || NoseImage != null || DogImage != null)
+            {
+                using var form = new MultipartFormDataContent
+                {
+                    { new StringContent(DogName), "dog_name" },
+                    { new StringContent(Breed), "breed" },
+                    { new StringContent(Age), "age" },
+                    { new StringContent(NIC), "owner_nic" }
+                };
 
+                var noseImageContent = new StreamContent(NoseImage);
+                noseImageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+                form.Add(noseImageContent, "nose_image", NoseImageName);
+
+                var dogImageContent = new StreamContent(DogImage);
+                dogImageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+                form.Add(dogImageContent, "dog_image", DogImageName);
+
+                var result = await _registerOwnershipService.RegisterOwnership(form);
+                if (result)
+                {
+                    await _dialogService.ShowAlertAsync("Information", "Your dog registered into our system sucessfully.", "OK");
+                }
+                else
+                {
+                    await _dialogService.ShowAlertAsync("Information", "Error occured while registering the dog.", "OK");
+                }
+            }
+            else
+            {
+                await _dialogService.ShowAlertAsync("Information", "Entry fields cannot be empty.", "OK");
+            }
         }
         catch (Exception)
         {

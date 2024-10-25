@@ -17,23 +17,23 @@ public partial class VerifyOwnershipViewModel : ObservableObject
         _verifyOwnershipService = verifyOwnershipService;
     }
 
+    #region Required Property List
+
     [ObservableProperty]
     private VerifiedInfomation verifiedInfomation;
 
-    [ObservableProperty]
-    private FileResult selectedDogNoseImage;
+    private FileResult SelectedDogNoseImage;
 
     [ObservableProperty]
     private ImageSource selectedDogNoseImageSource;
 
     [ObservableProperty]
-    private FileResult dogImage;
-    
-    [ObservableProperty]
     private ImageSource dogImageSource;
 
     [ObservableProperty]
     private bool isEnabled;
+
+    #endregion
 
     [RelayCommand]
     async Task GoBack()
@@ -53,8 +53,15 @@ public partial class VerifyOwnershipViewModel : ObservableObject
                 var stream = await SelectedDogNoseImage.OpenReadAsync();
                 SelectedDogNoseImageSource = ImageSource.FromStream(() => stream);
             }
+            else
+            {
+                SelectedDogNoseImageSource = null;
+                IsEnabled = false;
+                VerifiedInfomation = null;
+                DogImageSource = null;
+            }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             await _dialogService.ShowAlertAsync("Information", "Error occured while selecting an image.", "OK");
         }
@@ -65,28 +72,34 @@ public partial class VerifyOwnershipViewModel : ObservableObject
     {
         try
         {
-            using var memoryStream = new MemoryStream();
-            await (await SelectedDogNoseImage.OpenReadAsync()).CopyToAsync(memoryStream);
-
-            using var content = new MultipartFormDataContent
+            var streamImg = await SelectedDogNoseImage.OpenReadAsync();
+            if (streamImg != null)
             {
-                { new ByteArrayContent(memoryStream.ToArray()), "file", SelectedDogNoseImage.FileName }
-            };
-
-            var result = await _verifyOwnershipService.GetOwnerVerifiedInfoAsync(content);
-
-            if (result.Dog == null && result.Owner == null)
-            {
-                await _dialogService.ShowAlertAsync("Information", "No dog is recorded in our database with this biometric.", "OK");
-            }
-            else
-            {
-                VerifiedInfomation = result;
-                var dogImage = await _verifyOwnershipService.GetDogImageAsync(result.Dog.EntryID);
-                if (dogImage != null)
+                using var form = new MultipartFormDataContent
                 {
-                    var stream = new MemoryStream(dogImage);
-                    DogImageSource = ImageSource.FromStream(() => stream);
+                    {
+                        new StreamContent(streamImg),
+                        "file",
+                        SelectedDogNoseImage.FileName
+                    }
+                };
+
+                // API Call (Request)
+                var result = await _verifyOwnershipService.GetOwnerVerifiedInfoAsync(form);
+
+                if (result.Dog == null && result.Owner == null)
+                {
+                    await _dialogService.ShowAlertAsync("Information", "No dog is recorded in our database with this biometric.", "OK");
+                }
+                else
+                {
+                    VerifiedInfomation = result;
+                    var dogImage = await _verifyOwnershipService.GetDogImageAsync(result.Dog.EntryID);
+                    if (dogImage != null)
+                    {
+                        var stream = new MemoryStream(dogImage);
+                        DogImageSource = ImageSource.FromStream(() => stream);
+                    }
                 }
             }
         }

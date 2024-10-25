@@ -53,7 +53,7 @@
                 Margin="0,8,0,0"
                 FontFamily="SignikaRegular"
                 FontSize="15"
-                Text="{Binding SelectedDogImageName}"
+                Text="{Binding DogImageName}"
                 TextColor="DimGrey"
                 VerticalOptions="Center" />
 
@@ -69,7 +69,7 @@
                     FontSize="15"
                     Placeholder="Dog's Name"
                     PlaceholderColor="DimGray"
-                    Text="{Binding RegisteredDog.Name}"
+                    Text="{Binding DogName}"
                     TextColor="Black" />
             </Frame>
 
@@ -85,7 +85,7 @@
                     FontSize="15"
                     Placeholder="Breed"
                     PlaceholderColor="DimGray"
-                    Text="{Binding RegisteredDog.Breed}"
+                    Text="{Binding Breed}"
                     TextColor="Black" />
             </Frame>
 
@@ -101,7 +101,7 @@
                     FontSize="15"
                     Placeholder="Age"
                     PlaceholderColor="DimGray"
-                    Text="{Binding RegisteredDog.Age}"
+                    Text="{Binding Age}"
                     TextColor="Black" />
             </Frame>
 
@@ -131,7 +131,7 @@
                 Margin="0,8,0,0"
                 FontFamily="SignikaRegular"
                 FontSize="15"
-                Text="{Binding SelectedDogNoseImageName}"
+                Text="{Binding NoseImageName}"
                 TextColor="DimGrey" />
 
             <Button

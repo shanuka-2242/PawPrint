@@ -1,8 +1,6 @@
-﻿using PawPrint.Models;
-
-namespace PawPrint.Services.RegisterOwnershipService;
+﻿namespace PawPrint.Services.RegisterOwnershipService;
 
 public interface IRegisterOwnershipService
 {
-    Task<bool> RegisterOwnership(RegisterInformation registerInformation);
+    Task<bool> RegisterOwnership(MultipartFormDataContent formDataContent);
 }

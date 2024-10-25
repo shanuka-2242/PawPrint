@@ -1,18 +1,29 @@
-﻿using PawPrint.Models;
-
-namespace PawPrint.Services.RegisterOwnershipService;
+﻿namespace PawPrint.Services.RegisterOwnershipService;
 
 public class RegisterOwnershipService : IRegisterOwnershipService
 {
-    public async Task<bool> RegisterOwnership(RegisterInformation registerInformation)
-    {
-		try
-		{
+    private HttpClient _httpClient { get; }
 
-		}
-		catch (Exception)
-		{
-			return false;
-		}
+    public RegisterOwnershipService(HttpClient httpClient)
+    {
+        httpClient.BaseAddress = new Uri("http://10.0.2.2:8000/");
+        _httpClient = httpClient;
+    }
+
+    public async Task<bool> RegisterOwnership(MultipartFormDataContent formDataContent)
+    {
+        try
+        {
+            var response = await _httpClient.PostAsync("register_dog", formDataContent);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 }
