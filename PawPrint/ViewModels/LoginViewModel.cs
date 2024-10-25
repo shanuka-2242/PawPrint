@@ -56,7 +56,12 @@ public partial class LoginViewModel : ObservableObject
                 {
                     if (EnteredPassword == loggedinUser.Password)
                     {
-                        await Shell.Current.GoToAsync($"//{nameof(RegisterOwnershipView)}");
+                        var param = new ShellNavigationQueryParameters
+                        {
+                            { "LoggedInUser", loggedinUser }
+                        };
+
+                        await Shell.Current.GoToAsync($"//{nameof(RegisterOwnershipView)}", param);
                     }
                     else
                     {

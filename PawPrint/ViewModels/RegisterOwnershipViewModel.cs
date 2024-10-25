@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PawPrint.Models;
 using PawPrint.Services.DialogService;
 using PawPrint.Services.RegisterOwnershipService;
 using PawPrint.Views;
@@ -7,6 +8,7 @@ using System.Net.Http.Headers;
 
 namespace PawPrint.ViewModels;
 
+[QueryProperty(nameof(LoggedInUser), "LoggedInUser")]
 public partial class RegisterOwnershipViewModel : ObservableObject
 {
     private readonly IDialogService _dialogService;
@@ -17,6 +19,22 @@ public partial class RegisterOwnershipViewModel : ObservableObject
         _registerOwnershipService = registerOwnershipService;
         _dialogService = dialogService;
     }
+
+    #region Receive Query Param
+
+    Owner loggedInUser;
+
+    public Owner LoggedInUser
+    {
+        get => loggedInUser;
+        set
+        {
+            loggedInUser = value;
+            OnPropertyChanged();
+        }
+    }
+
+    #endregion
 
     #region Required Property List
 
@@ -38,8 +56,6 @@ public partial class RegisterOwnershipViewModel : ObservableObject
 
     [ObservableProperty]
     public string age;
-
-    public string NIC { get; set; } = "2000";
 
     #endregion
 
@@ -98,7 +114,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
                     { new StringContent(DogName), "dog_name" },
                     { new StringContent(Breed), "breed" },
                     { new StringContent(Age), "age" },
-                    { new StringContent(NIC), "owner_nic" }
+                    { new StringContent(LoggedInUser.NIC), "owner_nic" }
                 };
 
                 var noseImageContent = new StreamContent(NoseImage);
