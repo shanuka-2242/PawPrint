@@ -1,26 +1,36 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PawPrint.Models;
+using PawPrint.Services.DialogService;
 using PawPrint.Views;
 
 namespace PawPrint.ViewModels;
 
 public partial class RegisterOwnershipViewModel : ObservableObject
 {
+    private readonly IDialogService _dialogService;
+
+    public RegisterOwnershipViewModel(IDialogService dialogService)
+    {
+        _dialogService = dialogService;
+    }
+
     [ObservableProperty]
     private Dog registeredDog;
 
     [ObservableProperty]
-    private FileResult dogImage;
+    private FileResult selectedDogImage;
 
     [ObservableProperty]
-    private string dogImageName;
+    private string selectedDogImageName;
 
     [ObservableProperty]
-    private FileResult dogNoseImage;
+    private FileResult selectedDogNoseImage;
 
     [ObservableProperty]
-    private string dogNoseImageName;
+    private string selectedDogNoseImageName;
+
+    private string nic = "2000";
 
     [RelayCommand]
     async Task LogOut()
@@ -33,23 +43,33 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     {
         try
         {
-            DogImage = await MediaPicker.PickPhotoAsync();
-            if (DogImage != null)
+            SelectedDogImage = await MediaPicker.PickPhotoAsync();
+            if (SelectedDogImage != null)
             {
-                DogImageName = $"Image - {DogImage.FileName}";
+                SelectedDogImageName = $"Image - {SelectedDogImage.FileName}";
             }
         }
         catch (Exception)
         {
-
-            throw;
+            await _dialogService.ShowAlertAsync("Information", "Error occured while selecting dog image.", "OK");
         }
     }
 
     [RelayCommand]
     async Task AttachDogNoseImage()
     {
-
+        try
+        {
+            SelectedDogNoseImage = await MediaPicker.PickPhotoAsync();
+            if (SelectedDogNoseImage != null)
+            {
+                SelectedDogNoseImageName = $"Image - {SelectedDogNoseImage.FileName}";
+            }
+        }
+        catch (Exception)
+        {
+            await _dialogService.ShowAlertAsync("Information", "Error occured while selecting dog nose image.", "OK");
+        }
     }
 
     [RelayCommand]
@@ -61,7 +81,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
         }
         catch (Exception)
         {
-
+            await _dialogService.ShowAlertAsync("Information", "Error occured while registering dog.", "OK");
         }
     }
 }

@@ -26,9 +26,10 @@
                 FontSize="25"
                 Text="Register your Dog" />
 
-            <HorizontalStackLayout Margin="0,30,0,0" Spacing="20">
+            <Grid Margin="0,30,0,0" ColumnDefinitions="*,Auto">
 
                 <Label
+                    Grid.Column="0"
                     FontFamily="SignikaMedium"
                     FontSize="15"
                     Text="Attach your dog's Image"
@@ -36,6 +37,7 @@
                     VerticalOptions="Center" />
 
                 <Button
+                    Grid.Column="1"
                     Padding="10"
                     BackgroundColor="{StaticResource PawPrintGreen}"
                     Command="{Binding AttachDogImageCommand}"
@@ -44,13 +46,14 @@
                     FontSize="17"
                     Text="Attach Image"
                     TextColor="White" />
-            </HorizontalStackLayout>
+            </Grid>
+
 
             <Label
                 Margin="0,8,0,0"
                 FontFamily="SignikaRegular"
                 FontSize="15"
-                Text="{Binding DogImageName}"
+                Text="{Binding SelectedDogImageName}"
                 TextColor="DimGrey"
                 VerticalOptions="Center" />
 
@@ -102,9 +105,10 @@
                     TextColor="Black" />
             </Frame>
 
-            <HorizontalStackLayout Margin="0,8,0,0" Spacing="20">
+            <Grid Margin="0,8,0,0" ColumnDefinitions="*,Auto">
 
                 <Label
+                    Grid.Column="0"
                     FontFamily="SignikaMedium"
                     FontSize="15"
                     Text="Attach your dog's nose Image"
@@ -112,6 +116,7 @@
                     VerticalOptions="Center" />
 
                 <Button
+                    Grid.Column="1"
                     Padding="10"
                     BackgroundColor="{StaticResource PawPrintGreen}"
                     Command="{Binding AttachDogNoseImageCommand}"
@@ -120,13 +125,13 @@
                     FontSize="17"
                     Text="Attach Image"
                     TextColor="White" />
-            </HorizontalStackLayout>
+            </Grid>
 
             <Label
                 Margin="0,8,0,0"
                 FontFamily="SignikaRegular"
                 FontSize="15"
-                Text="{Binding DogNoseImageName}"
+                Text="{Binding SelectedDogNoseImageName}"
                 TextColor="DimGrey" />
 
             <Button

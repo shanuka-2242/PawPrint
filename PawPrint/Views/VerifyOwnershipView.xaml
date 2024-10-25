@@ -33,7 +33,7 @@
                     Aspect="AspectFit"
                     BackgroundColor="Transparent"
                     HeightRequest="200"
-                    Source="{Binding SelectedImageSource}"
+                    Source="{Binding SelectedDogNoseImageSource}"
                     WidthRequest="200" />
             </Frame>
 
@@ -89,6 +89,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -115,7 +116,7 @@
                             Grid.Column="1"
                             FontFamily="SignikaRegular"
                             FontSize="16"
-                            Text="{Binding VerifiedInfomation.DogName}" />
+                            Text="{Binding VerifiedInfomation.Dog.Name}" />
 
                         <Label
                             Grid.Row="2"
@@ -129,7 +130,7 @@
                             Grid.Column="1"
                             FontFamily="SignikaRegular"
                             FontSize="16"
-                            Text="{Binding VerifiedInfomation.Breed}" />
+                            Text="{Binding VerifiedInfomation.Dog.Breed}" />
 
                         <Label
                             Grid.Row="3"
@@ -143,7 +144,31 @@
                             Grid.Column="1"
                             FontFamily="SignikaRegular"
                             FontSize="16"
-                            Text="{Binding VerifiedInfomation.Age}" />
+                            Text="{Binding VerifiedInfomation.Dog.Age}" />
+
+                        <Label
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            FontFamily="SignikaMedium"
+                            FontSize="16"
+                            Text="Image" />
+
+                        <Frame
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Padding="5"
+                            BackgroundColor="Transparent"
+                            BorderColor="Gray"
+                            CornerRadius="5"
+                            Margin="0,15,0,0">
+
+                            <Image
+                                Aspect="AspectFit"
+                                BackgroundColor="Transparent"
+                                HeightRequest="150"
+                                Source="{Binding DogImageSource}"
+                                WidthRequest="150" />
+                        </Frame>
 
                     </Grid>
                 </Frame>
@@ -187,7 +212,7 @@
                             Grid.Column="1"
                             FontFamily="SignikaRegular"
                             FontSize="16"
-                            Text="{Binding VerifiedInfomation.NIC}" />
+                            Text="{Binding VerifiedInfomation.Owner.NIC}" />
 
                         <Label
                             Grid.Row="2"
@@ -201,7 +226,7 @@
                             Grid.Column="1"
                             FontFamily="SignikaRegular"
                             FontSize="16"
-                            Text="{Binding VerifiedInfomation.FullName}" />
+                            Text="{Binding VerifiedInfomation.Owner.FullName}" />
 
                         <Label
                             Grid.Row="3"
@@ -215,7 +240,7 @@
                             Grid.Column="1"
                             FontFamily="SignikaRegular"
                             FontSize="16"
-                            Text="{Binding VerifiedInfomation.Phone}" />
+                            Text="{Binding VerifiedInfomation.Owner.Phone}" />
 
                         <Label
                             Grid.Row="4"
@@ -229,7 +254,7 @@
                             Grid.Column="1"
                             FontFamily="SignikaRegular"
                             FontSize="16"
-                            Text="{Binding VerifiedInfomation.Email}" />
+                            Text="{Binding VerifiedInfomation.Owner.Email}" />
 
                         <Label
                             Grid.Row="5"
@@ -243,7 +268,7 @@
                             Grid.Column="1"
                             FontFamily="SignikaRegular"
                             FontSize="16"
-                            Text="{Binding VerifiedInfomation.CurrentAddress}" />
+                            Text="{Binding VerifiedInfomation.Owner.CurrentAddress}" />
 
                     </Grid>
                 </Frame>

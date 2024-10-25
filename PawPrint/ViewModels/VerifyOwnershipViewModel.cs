@@ -21,10 +21,16 @@ public partial class VerifyOwnershipViewModel : ObservableObject
     private VerifiedInfomation verifiedInfomation;
 
     [ObservableProperty]
-    private ImageSource selectedImageSource;
+    private FileResult selectedDogNoseImage;
 
     [ObservableProperty]
-    private FileResult selectedImageFile;
+    private ImageSource selectedDogNoseImageSource;
+
+    [ObservableProperty]
+    private FileResult dogImage;
+    
+    [ObservableProperty]
+    private ImageSource dogImageSource;
 
     [ObservableProperty]
     private bool isEnabled;
@@ -40,22 +46,17 @@ public partial class VerifyOwnershipViewModel : ObservableObject
     {
         try
         {
-            //SelectedImageFile = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
-            //{
-            //    Title = "Select a dog's nose image",
-            //});
-
-            SelectedImageFile = await MediaPicker.PickPhotoAsync();
-            if (SelectedImageFile != null)
+            SelectedDogNoseImage = await MediaPicker.PickPhotoAsync();
+            if (SelectedDogNoseImage != null)
             {
                 IsEnabled = true;
-                var stream = await SelectedImageFile.OpenReadAsync();
-                SelectedImageSource = ImageSource.FromStream(() => stream);
+                var stream = await SelectedDogNoseImage.OpenReadAsync();
+                SelectedDogNoseImageSource = ImageSource.FromStream(() => stream);
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            await _dialogService.ShowAlertAsync("Information", "Error occured while selecting an Image.", "OK");
+            await _dialogService.ShowAlertAsync("Information", "Error occured while selecting an image.", "OK");
         }
     }
 
@@ -64,27 +65,34 @@ public partial class VerifyOwnershipViewModel : ObservableObject
     {
         try
         {
-            var stream = await SelectedImageFile.OpenReadAsync();
-            var memoryStream = new MemoryStream();
-            await stream.CopyToAsync(memoryStream);
-            var imageBytes = memoryStream.ToArray();
-            using var content = new MultipartFormDataContent();
-            var byteArrayContent = new ByteArrayContent(imageBytes);
-            content.Add(byteArrayContent, "file", SelectedImageFile.FileName);
+            using var memoryStream = new MemoryStream();
+            await (await SelectedDogNoseImage.OpenReadAsync()).CopyToAsync(memoryStream);
+
+            using var content = new MultipartFormDataContent
+            {
+                { new ByteArrayContent(memoryStream.ToArray()), "file", SelectedDogNoseImage.FileName }
+            };
 
             var result = await _verifyOwnershipService.GetOwnerVerifiedInfoAsync(content);
-            if (result == null)
+
+            if (result.Dog == null && result.Owner == null)
             {
                 await _dialogService.ShowAlertAsync("Information", "No dog is recorded in our database with this biometric.", "OK");
             }
             else
             {
                 VerifiedInfomation = result;
+                var dogImage = await _verifyOwnershipService.GetDogImageAsync(result.Dog.EntryID);
+                if (dogImage != null)
+                {
+                    var stream = new MemoryStream(dogImage);
+                    DogImageSource = ImageSource.FromStream(() => stream);
+                }
             }
         }
         catch (Exception)
         {
-            await _dialogService.ShowAlertAsync("Information", "Error occured while selecting an Image.", "OK");
+            await _dialogService.ShowAlertAsync("Information", "Error occurred while selecting an Image.", "OK");
         }
     }
 }

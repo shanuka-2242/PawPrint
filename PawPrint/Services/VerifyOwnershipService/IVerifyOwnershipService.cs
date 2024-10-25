@@ -5,4 +5,5 @@ namespace PawPrint.Services.VerifyOwnershipService;
 public interface IVerifyOwnershipService
 {
     Task<VerifiedInfomation> GetOwnerVerifiedInfoAsync(MultipartFormDataContent content);
+    Task<byte[]> GetDogImageAsync(int entryId);
 }

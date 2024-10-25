@@ -12,6 +12,7 @@ public class VerifyOwnershipService : IVerifyOwnershipService
         httpClient.BaseAddress = new Uri("http://10.0.2.2:8000/");
         _httpClient = httpClient;
     }
+
     public async Task<VerifiedInfomation> GetOwnerVerifiedInfoAsync(MultipartFormDataContent content)
     {
         try
@@ -20,6 +21,23 @@ public class VerifyOwnershipService : IVerifyOwnershipService
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadFromJsonAsync<VerifiedInfomation>();
+            }
+            return null;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+    }
+
+    public async Task<byte[]> GetDogImageAsync(int entryId)
+    {
+        try
+        {
+            var response = await _httpClient.GetAsync($"registered_dog_image/{entryId}");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsByteArrayAsync();
             }
             return null;
         }

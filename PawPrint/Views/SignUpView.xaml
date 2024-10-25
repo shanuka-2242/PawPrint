@@ -164,12 +164,12 @@
                     Margin="0,20,0,0"
                     Padding="10"
                     BackgroundColor="{StaticResource PawPrintGreen}"
+                    Command="{Binding SignUpCommand}"
                     CornerRadius="5"
                     FontFamily="SignikaMedium"
                     FontSize="17"
                     Text="SignUp"
-                    TextColor="White"
-                    Command="{Binding SignUpCommand}"/>
+                    TextColor="White" />
 
                 <HorizontalStackLayout
                     Margin="0,0,0,20"
