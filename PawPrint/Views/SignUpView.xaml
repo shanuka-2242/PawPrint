@@ -61,7 +61,7 @@
                         FontSize="15"
                         Placeholder="Owner FullName"
                         PlaceholderColor="DimGray"
-                        Text="{Binding EnteredFullName}"
+                        Text="{Binding Owner.FullName}"
                         TextColor="Black" />
                 </Frame>
 
@@ -77,7 +77,7 @@
                         FontSize="15"
                         Placeholder="NIC No"
                         PlaceholderColor="DimGray"
-                        Text="{Binding EnteredNIC}"
+                        Text="{Binding Owner.NIC}"
                         TextColor="Black" />
                 </Frame>
 
@@ -94,7 +94,7 @@
                         Keyboard="Telephone"
                         Placeholder="Phone"
                         PlaceholderColor="DimGray"
-                        Text="{Binding EnteredPhone}"
+                        Text="{Binding Owner.Phone}"
                         TextColor="Black" />
                 </Frame>
 
@@ -111,7 +111,7 @@
                         Keyboard="Email"
                         Placeholder="Email"
                         PlaceholderColor="DimGray"
-                        Text="{Binding EnteredEmail}"
+                        Text="{Binding Owner.Email}"
                         TextColor="Black" />
                 </Frame>
 
@@ -128,7 +128,7 @@
                         Keyboard="Email"
                         Placeholder="Current Address"
                         PlaceholderColor="DimGray"
-                        Text="{Binding EnteredCurrentAddress}"
+                        Text="{Binding Owner.CurrentAddress}"
                         TextColor="Black" />
                 </Frame>
 
@@ -145,7 +145,7 @@
                         IsPassword="True"
                         Placeholder="Password"
                         PlaceholderColor="DimGray"
-                        Text="{Binding EnteredPassword}"
+                        Text="{Binding Owner.Password}"
                         TextColor="Black" />
                 </Frame>
 

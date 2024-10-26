@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PawPrint.Models;
 using PawPrint.Services.AuthenticateService;
 using PawPrint.Services.DialogService;
 using PawPrint.Views;
@@ -24,25 +25,10 @@ public partial class SignUpViewModel : ObservableObject
     private string copyrightText;
 
     [ObservableProperty]
-    private string enteredNIC;
-
-    [ObservableProperty]
-    private string enteredFullName;
-
-    [ObservableProperty]
-    private string enteredPhone;
-
-    [ObservableProperty]
-    private string enteredEmail;
-
-    [ObservableProperty]
-    private string enteredCurrentAddress;
-
-    [ObservableProperty]
     private string enteredConfirmPassword;
 
     [ObservableProperty]
-    private string enteredPassword;
+    private Owner owner = new();
 
     #endregion
 
@@ -57,31 +43,31 @@ public partial class SignUpViewModel : ObservableObject
     {
         try
         {
-            if (EnteredNIC != null || EnteredFullName != null || EnteredPhone != null || EnteredEmail != null
-                || EnteredCurrentAddress != null || EnteredConfirmPassword != null || EnteredPassword != null)
+            if (Owner.NIC != null & Owner.FullName != null & Owner.Phone != null & Owner.Email != null
+                & Owner.CurrentAddress != null & Owner.Password != null & EnteredConfirmPassword != null)
             {
-                var alreadyUser = await _authenticateService.GetOwnerByNICAsync(EnteredNIC);
-                if (alreadyUser == null) 
+                var alreadyUser = await _authenticateService.GetOwnerByNICAsync(Owner.NIC);
+                if (alreadyUser == null)
                 {
-                    if (EnteredConfirmPassword == EnteredPassword)
+                    if (EnteredConfirmPassword == Owner.Password)
                     {
                         using var form = new MultipartFormDataContent
-                    {
-                        { new StringContent(EnteredNIC), "nic" },
-                        { new StringContent(EnteredFullName), "full_name" },
-                        { new StringContent(EnteredPhone), "phone" },
-                        { new StringContent(EnteredEmail), "email" },
-                        { new StringContent(EnteredCurrentAddress), "current_address" },
-                        { new StringContent(EnteredPassword), "password" }
-                    };
+                        {
+                            { new StringContent(Owner.NIC), "nic" },
+                            { new StringContent(Owner.FullName), "full_name" },
+                            { new StringContent(Owner.Phone), "phone" },
+                            { new StringContent(Owner.Email), "email" },
+                            { new StringContent(Owner.CurrentAddress), "current_address" },
+                            { new StringContent(Owner.Password), "password" }
+                        };
 
                         var result = await _authenticateService.SignUpOwnerAsync(form);
                         if (result)
                         {
                             var param = new ShellNavigationQueryParameters
-                        {
-                            { "LoggedInUserNIC", EnteredNIC }
-                        };
+                           {
+                               { "LoggedInUserNIC", Owner.NIC }
+                           };
 
                             await Shell.Current.GoToAsync($"//{nameof(RegisterOwnershipView)}", param);
                         }
