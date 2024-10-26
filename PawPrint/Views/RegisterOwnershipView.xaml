@@ -145,6 +145,11 @@
                 Text="Register"
                 TextColor="White" />
 
+            <!--TO DO-->
+            <!--<CollectionView>
+                
+            </CollectionView>-->
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

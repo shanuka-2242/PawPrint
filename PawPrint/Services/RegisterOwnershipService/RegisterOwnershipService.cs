@@ -1,4 +1,7 @@
-﻿namespace PawPrint.Services.RegisterOwnershipService;
+﻿using PawPrint.Models;
+using System.Net.Http.Json;
+
+namespace PawPrint.Services.RegisterOwnershipService;
 
 public class RegisterOwnershipService : IRegisterOwnershipService
 {
@@ -24,6 +27,23 @@ public class RegisterOwnershipService : IRegisterOwnershipService
         catch (Exception)
         {
             return false;
+        }
+    }
+
+    public async Task<List<Dog>> GetRegisteredDogsByOwnerNICAsync(string ownerNIC)
+    {
+        try
+        {
+            var response = await _httpClient.GetAsync($"registered_dog/{ownerNIC}");
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<List<Dog>>();
+            }
+            return null;
+        }
+        catch (Exception)
+        {
+            return null;
         }
     }
 }

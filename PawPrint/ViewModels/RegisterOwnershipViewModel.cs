@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PawPrint.Models;
 using PawPrint.Services.DialogService;
 using PawPrint.Services.RegisterOwnershipService;
 using PawPrint.Views;
@@ -17,6 +18,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     {
         _registerOwnershipService = registerOwnershipService;
         _dialogService = dialogService;
+        Task.Run(async() => await LoadData());
     }
 
     #region Query Param
@@ -55,7 +57,15 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     [ObservableProperty]
     public string age;
 
+    [ObservableProperty]
+    public List<Dog> registeredDogList;
+
     #endregion
+
+    async Task LoadData()
+    {
+        RegisteredDogList = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync(LoggedInUserNIC);
+    }
 
     [RelayCommand]
     async Task LogOut()
@@ -126,6 +136,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
                 var result = await _registerOwnershipService.RegisterOwnershipAsync(form);
                 if (result)
                 {
+                    RegisteredDogList = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync(LoggedInUserNIC);
                     await _dialogService.ShowAlertAsync("Information", "Your dog registered into our system sucessfully.", "OK");
                 }
                 else
