@@ -13,10 +13,12 @@ public partial class LoginViewModel : ObservableObject
 
     public LoginViewModel(IDialogService dialogService, IAuthenticateService authenticateService)
     {
-        SetCopyright();
+        CopyrightText = $"® {DateTime.Now.Year} Paw Print Sri Lanka. All rights reserved";
         _dialogService = dialogService;
         _authenticateService = authenticateService;
     }
+
+    #region Required Property List
 
     [ObservableProperty]
     private string copyrightText;
@@ -27,10 +29,7 @@ public partial class LoginViewModel : ObservableObject
     [ObservableProperty]
     private string enteredPassword;
 
-    void SetCopyright()
-    {
-        CopyrightText = $"® {DateTime.Now.Year} Paw Print Sri Lanka. All rights reserved";
-    }
+    #endregion
 
     [RelayCommand]
     async Task GoBack()
@@ -58,7 +57,7 @@ public partial class LoginViewModel : ObservableObject
                     {
                         var param = new ShellNavigationQueryParameters
                         {
-                            { "LoggedInUser", loggedinUser }
+                            { "LoggedInUserNIC", loggedinUser.NIC }
                         };
 
                         await Shell.Current.GoToAsync($"//{nameof(RegisterOwnershipView)}", param);
@@ -82,6 +81,5 @@ public partial class LoginViewModel : ObservableObject
         {
             await _dialogService.ShowAlertAsync("Information", "Error occured while logging into the application", "OK");
         }
-        //await Shell.Current.GoToAsync($"//{nameof(HomeView)}");
     }
 }

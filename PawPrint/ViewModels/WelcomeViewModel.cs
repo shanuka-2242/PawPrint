@@ -8,7 +8,7 @@ public partial class WelcomeViewModel : ObservableObject
 {
     public WelcomeViewModel()
     {
-        SetCopyright();
+        CopyrightText = $"® {DateTime.Now.Year} Paw Print Sri Lanka. All rights reserved";
     }
 
     [ObservableProperty]
@@ -24,10 +24,5 @@ public partial class WelcomeViewModel : ObservableObject
     async Task Verify()
     {
         await Shell.Current.GoToAsync(nameof(VerifyOwnershipView));
-    }
-
-    void SetCopyright()
-    {
-        CopyrightText = $"® {DateTime.Now.Year} Paw Print Sri Lanka. All rights reserved";
     }
 }

@@ -2,5 +2,5 @@
 
 public interface IRegisterOwnershipService
 {
-    Task<bool> RegisterOwnership(MultipartFormDataContent formDataContent);
+    Task<bool> RegisterOwnershipAsync(MultipartFormDataContent formDataContent);
 }

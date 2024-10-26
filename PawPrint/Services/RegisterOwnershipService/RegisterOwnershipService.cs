@@ -10,7 +10,7 @@ public class RegisterOwnershipService : IRegisterOwnershipService
         _httpClient = httpClient;
     }
 
-    public async Task<bool> RegisterOwnership(MultipartFormDataContent formDataContent)
+    public async Task<bool> RegisterOwnershipAsync(MultipartFormDataContent formDataContent)
     {
         try
         {

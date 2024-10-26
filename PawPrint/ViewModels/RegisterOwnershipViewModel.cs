@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using PawPrint.Models;
 using PawPrint.Services.DialogService;
 using PawPrint.Services.RegisterOwnershipService;
 using PawPrint.Views;
@@ -8,7 +7,7 @@ using System.Net.Http.Headers;
 
 namespace PawPrint.ViewModels;
 
-[QueryProperty(nameof(LoggedInUser), "LoggedInUser")]
+[QueryProperty(nameof(LoggedInUserNIC), "LoggedInUserNIC")]
 public partial class RegisterOwnershipViewModel : ObservableObject
 {
     private readonly IDialogService _dialogService;
@@ -20,16 +19,15 @@ public partial class RegisterOwnershipViewModel : ObservableObject
         _dialogService = dialogService;
     }
 
-    #region Receive Query Param
+    #region Query Param
 
-    Owner loggedInUser;
-
-    public Owner LoggedInUser
+    string loggedInUserNIC;
+    public string LoggedInUserNIC
     {
-        get => loggedInUser;
+        get => loggedInUserNIC;
         set
         {
-            loggedInUser = value;
+            loggedInUserNIC = value;
             OnPropertyChanged();
         }
     }
@@ -62,7 +60,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     [RelayCommand]
     async Task LogOut()
     {
-        await Shell.Current.GoToAsync($"//{nameof(LoginView)}");
+        await Shell.Current.GoToAsync($"//{nameof(WelcomeView)}");
     }
 
     [RelayCommand]
@@ -114,7 +112,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
                     { new StringContent(DogName), "dog_name" },
                     { new StringContent(Breed), "breed" },
                     { new StringContent(Age), "age" },
-                    { new StringContent(LoggedInUser.NIC), "owner_nic" }
+                    { new StringContent(LoggedInUserNIC), "owner_nic" }
                 };
 
                 var noseImageContent = new StreamContent(NoseImage);
@@ -125,7 +123,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
                 dogImageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
                 form.Add(dogImageContent, "dog_image", DogImageName);
 
-                var result = await _registerOwnershipService.RegisterOwnership(form);
+                var result = await _registerOwnershipService.RegisterOwnershipAsync(form);
                 if (result)
                 {
                     await _dialogService.ShowAlertAsync("Information", "Your dog registered into our system sucessfully.", "OK");

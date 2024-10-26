@@ -29,4 +29,21 @@ public class AuthenticateService : IAuthenticateService
             return null;
         }
     }
+
+    async public Task<bool> SignUpOwnerAsync(MultipartFormDataContent multipartFormData)
+    {
+        try
+        {
+            var response = await _httpClient.PostAsync("register_owner", multipartFormData);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
 }
