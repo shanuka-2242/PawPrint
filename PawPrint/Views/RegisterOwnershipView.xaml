@@ -145,11 +145,18 @@
                 Text="Register"
                 TextColor="White" />
 
-            <!--TO DO-->
-            <!--<CollectionView>
-                
+            <!--<CollectionView ItemsSource="{Binding RegisteredDogList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="20" />
+                            <Label Text="{Binding Breed}" FontSize="16" />
+                            <Label Text="{Binding Age}" FontSize="16" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
             </CollectionView>-->
-            
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

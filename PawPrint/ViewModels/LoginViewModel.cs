@@ -48,7 +48,7 @@ public partial class LoginViewModel : ObservableObject
     {
         try
         {
-            if (EnteredNIC != null & EnteredPassword != null)
+            if (EnteredNIC != null && EnteredPassword != null)
             {
                 var loggedinUser = await _authenticateService.GetOwnerByNICAsync(EnteredNIC);
                 if (loggedinUser != null)

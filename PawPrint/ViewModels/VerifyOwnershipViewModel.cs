@@ -15,6 +15,8 @@ public partial class VerifyOwnershipViewModel : ObservableObject
     {
         _dialogService = dialogService;
         _verifyOwnershipService = verifyOwnershipService;
+        SelectedDogNoseImageSource = ImageSource.FromFile("add_photo.png");
+        DogImageSource = ImageSource.FromFile("image_view.png");
     }
 
     #region Required Property List
@@ -55,10 +57,10 @@ public partial class VerifyOwnershipViewModel : ObservableObject
             }
             else
             {
-                SelectedDogNoseImageSource = null;
+                SelectedDogNoseImageSource = ImageSource.FromFile("add_photo.png");
+                DogImageSource = ImageSource.FromFile("add_photo.png");
                 IsEnabled = false;
                 VerifiedInfomation = null;
-                DogImageSource = null;
             }
         }
         catch (Exception)

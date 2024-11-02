@@ -43,8 +43,8 @@ public partial class SignUpViewModel : ObservableObject
     {
         try
         {
-            if (Owner.NIC != null & Owner.FullName != null & Owner.Phone != null & Owner.Email != null
-                & Owner.CurrentAddress != null & Owner.Password != null & EnteredConfirmPassword != null)
+            if (Owner.NIC != null && Owner.FullName != null && Owner.Phone != null && Owner.Email != null
+                && Owner.CurrentAddress != null && Owner.Password != null && EnteredConfirmPassword != null)
             {
                 var alreadyUser = await _authenticateService.GetOwnerByNICAsync(Owner.NIC);
                 if (alreadyUser == null)

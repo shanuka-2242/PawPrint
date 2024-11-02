@@ -13,20 +13,20 @@ public class RegisterOwnershipService : IRegisterOwnershipService
         _httpClient = httpClient;
     }
 
-    public async Task<bool> RegisterOwnershipAsync(MultipartFormDataContent formDataContent)
+    public async Task<int> RegisterOwnershipAsync(MultipartFormDataContent formDataContent)
     {
         try
         {
             var response = await _httpClient.PostAsync("register_dog", formDataContent);
             if (response.IsSuccessStatusCode)
             {
-                return true;
+                return (int)response.StatusCode;
             }
-            return false;
+            return (int)response.StatusCode;
         }
         catch (Exception)
         {
-            return false;
+            return 500;
         }
     }
 

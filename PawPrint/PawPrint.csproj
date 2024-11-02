@@ -61,8 +61,10 @@
 	  <None Remove="Resources\Fonts\Signika-Medium.ttf" />
 	  <None Remove="Resources\Fonts\Signika-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Signika-SemiBold.ttf" />
+	  <None Remove="Resources\Images\add_photo.png" />
 	  <None Remove="Resources\Images\applogo.png" />
 	  <None Remove="Resources\Images\arrow_back_ios.png" />
+	  <None Remove="Resources\Images\image_view.png" />
 	  <None Remove="Resources\Images\logout.png" />
 	</ItemGroup>
 

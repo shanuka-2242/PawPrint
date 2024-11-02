@@ -8,7 +8,7 @@ using System.Net.Http.Headers;
 
 namespace PawPrint.ViewModels;
 
-[QueryProperty(nameof(LoggedInUserNIC), "LoggedInUserNIC")]
+//[QueryProperty(nameof(LoggedInUserNIC), "LoggedInUserNIC")]
 public partial class RegisterOwnershipViewModel : ObservableObject
 {
     private readonly IDialogService _dialogService;
@@ -18,21 +18,21 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     {
         _registerOwnershipService = registerOwnershipService;
         _dialogService = dialogService;
-        Task.Run(async() => await LoadData());
+        //Task.Run(async() => await LoadData());
     }
 
     #region Query Param
 
-    string loggedInUserNIC;
-    public string LoggedInUserNIC
-    {
-        get => loggedInUserNIC;
-        set
-        {
-            loggedInUserNIC = value;
-            OnPropertyChanged();
-        }
-    }
+    //string loggedInUserNIC;
+    //public string LoggedInUserNIC
+    //{
+    //    get => loggedInUserNIC;
+    //    set
+    //    {
+    //        loggedInUserNIC = value;
+    //        OnPropertyChanged();
+    //    }
+    //}
 
     #endregion
 
@@ -40,13 +40,13 @@ public partial class RegisterOwnershipViewModel : ObservableObject
 
     public Stream DogImage { get; set; }
 
+    [ObservableProperty]
+    public string dogImageName;
+
     public Stream NoseImage { get; set; }
 
     [ObservableProperty]
     public string noseImageName;
-
-    [ObservableProperty]
-    public string dogImageName;
 
     [ObservableProperty]
     public string dogName;
@@ -57,15 +57,16 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     [ObservableProperty]
     public string age;
 
-    [ObservableProperty]
-    public List<Dog> registeredDogList;
+    //[ObservableProperty]
+    //public List<Dog> registeredDogList = [];
 
     #endregion
 
-    async Task LoadData()
-    {
-        RegisteredDogList = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync(LoggedInUserNIC);
-    }
+    //async Task LoadData()
+    //{
+    //    RegisteredDogList.Clear();
+    //    RegisteredDogList = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync(LoggedInUserNIC);
+    //}
 
     [RelayCommand]
     async Task LogOut()
@@ -109,20 +110,31 @@ public partial class RegisterOwnershipViewModel : ObservableObject
         }
     }
 
+    private void ClearFields()
+    {
+        DogImage = null;
+        DogImageName= null;
+        DogName= null;
+        Breed = null;
+        Age = null;
+        NoseImage= null;
+        NoseImageName= null;
+    }
+
     [RelayCommand]
     async Task RegisterDog()
     {
         try
         {
-            if (DogName != null || Age != null || Breed != null
-                || NoseImage != null || DogImage != null)
+            if (DogName != null && Age != null && Breed != null && NoseImage != null && DogImage != null)
             {
                 using var form = new MultipartFormDataContent
                 {
                     { new StringContent(DogName), "dog_name" },
                     { new StringContent(Breed), "breed" },
                     { new StringContent(Age), "age" },
-                    { new StringContent(LoggedInUserNIC), "owner_nic" }
+                    //{ new StringContent(LoggedInUserNIC), "owner_nic" }
+                    { new StringContent("200023802470"), "owner_nic" }
                 };
 
                 var noseImageContent = new StreamContent(NoseImage);
@@ -134,13 +146,20 @@ public partial class RegisterOwnershipViewModel : ObservableObject
                 form.Add(dogImageContent, "dog_image", DogImageName);
 
                 var result = await _registerOwnershipService.RegisterOwnershipAsync(form);
-                if (result)
+                if (result == 200) 
                 {
-                    RegisteredDogList = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync(LoggedInUserNIC);
+                    //RegisteredDogList.Clear();
+                    //RegisteredDogList = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync(LoggedInUserNIC);
+
                     await _dialogService.ShowAlertAsync("Information", "Your dog registered into our system sucessfully.", "OK");
+                    ClearFields();
+                }
+                else if (result == 400) 
+                {
+                    await _dialogService.ShowAlertAsync("Information", "This dog is already registered in our system.", "OK");
                 }
                 else
-                {
+                { 
                     await _dialogService.ShowAlertAsync("Information", "Error occured while registering the dog.", "OK");
                 }
             }
