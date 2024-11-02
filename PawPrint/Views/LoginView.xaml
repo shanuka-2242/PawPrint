@@ -54,7 +54,7 @@
                     Padding="5"
                     BackgroundColor="White"
                     BorderColor="DimGray"
-                    CornerRadius="5">
+                    CornerRadius="3">
 
                     <local:CustomEntry
                         FontFamily="SignikaSemiBold"
@@ -70,7 +70,7 @@
                     Padding="5"
                     BackgroundColor="White"
                     BorderColor="DimGray"
-                    CornerRadius="5">
+                    CornerRadius="3">
 
                     <local:CustomEntry
                         FontFamily="SignikaMedium"
@@ -88,7 +88,7 @@
                     Padding="10"
                     BackgroundColor="{StaticResource PawPrintGreen}"
                     Command="{Binding LogInCommand}"
-                    CornerRadius="5"
+                    CornerRadius="3"
                     FontFamily="SignikaMedium"
                     FontSize="17"
                     Text="LogIn"

@@ -64,8 +64,10 @@
 	  <None Remove="Resources\Images\add_photo.png" />
 	  <None Remove="Resources\Images\applogo.png" />
 	  <None Remove="Resources\Images\arrow_back_ios.png" />
+	  <None Remove="Resources\Images\arrow_forward_ios.png" />
 	  <None Remove="Resources\Images\image_view.png" />
 	  <None Remove="Resources\Images\logout.png" />
+	  <None Remove="Resources\Images\upload_file.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -83,6 +85,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\RegisteredDogListView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\RegisterOwnershipView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

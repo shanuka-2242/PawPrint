@@ -36,16 +36,20 @@
                     TextColor="Black"
                     VerticalOptions="Center" />
 
-                <Button
+                <Frame
                     Grid.Column="1"
                     Padding="10"
-                    BackgroundColor="{StaticResource PawPrintGreen}"
-                    Command="{Binding AttachDogImageCommand}"
-                    CornerRadius="5"
-                    FontFamily="SignikaMedium"
-                    FontSize="17"
-                    Text="Attach Image"
-                    TextColor="White" />
+                    BorderColor="{StaticResource PawPrintGreen}"
+                    CornerRadius="50">
+                    
+                    <ImageButton
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        Command="{Binding AttachDogImageCommand}"
+                        HeightRequest="25"
+                        Source="upload_file.png"
+                        WidthRequest="25" />
+                </Frame>
             </Grid>
 
 
@@ -62,14 +66,14 @@
                 Padding="5"
                 BackgroundColor="White"
                 BorderColor="DimGray"
-                CornerRadius="5">
+                CornerRadius="3">
 
                 <local:CustomEntry
                     FontFamily="SignikaSemiBold"
                     FontSize="15"
                     Placeholder="Dog's Name"
                     PlaceholderColor="DimGray"
-                    Text="{Binding DogName}"
+                    Text="{Binding Dog.Name}"
                     TextColor="Black" />
             </Frame>
 
@@ -78,14 +82,14 @@
                 Padding="5"
                 BackgroundColor="White"
                 BorderColor="DimGray"
-                CornerRadius="5">
+                CornerRadius="3">
 
                 <local:CustomEntry
                     FontFamily="SignikaSemiBold"
                     FontSize="15"
                     Placeholder="Breed"
                     PlaceholderColor="DimGray"
-                    Text="{Binding Breed}"
+                    Text="{Binding Dog.Breed}"
                     TextColor="Black" />
             </Frame>
 
@@ -94,14 +98,14 @@
                 Padding="5"
                 BackgroundColor="White"
                 BorderColor="DimGray"
-                CornerRadius="5">
+                CornerRadius="3">
 
                 <local:CustomEntry
                     FontFamily="SignikaSemiBold"
                     FontSize="15"
                     Placeholder="Age"
                     PlaceholderColor="DimGray"
-                    Text="{Binding Age}"
+                    Text="{Binding Dog.Age}"
                     TextColor="Black" />
             </Frame>
 
@@ -115,16 +119,19 @@
                     TextColor="Black"
                     VerticalOptions="Center" />
 
-                <Button
+                <Frame
                     Grid.Column="1"
                     Padding="10"
-                    BackgroundColor="{StaticResource PawPrintGreen}"
-                    Command="{Binding AttachDogNoseImageCommand}"
-                    CornerRadius="5"
-                    FontFamily="SignikaMedium"
-                    FontSize="17"
-                    Text="Attach Image"
-                    TextColor="White" />
+                    BorderColor="{StaticResource PawPrintGreen}"
+                    CornerRadius="50">
+                    <ImageButton
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        Command="{Binding AttachDogNoseImageCommand}"
+                        HeightRequest="25"
+                        Source="upload_file.png"
+                        WidthRequest="25" />
+                </Frame>
             </Grid>
 
             <Label
@@ -139,23 +146,43 @@
                 Padding="10"
                 BackgroundColor="{StaticResource PawPrintGreen}"
                 Command="{Binding RegisterDogCommand}"
-                CornerRadius="5"
+                CornerRadius="3"
                 FontFamily="SignikaMedium"
                 FontSize="17"
                 Text="Register"
                 TextColor="White" />
 
-            <!--<CollectionView ItemsSource="{Binding RegisteredDogList}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="20" />
-                            <Label Text="{Binding Breed}" FontSize="16" />
-                            <Label Text="{Binding Age}" FontSize="16" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>-->
+            <Frame
+                Margin="0,5,0,0"
+                Padding="10"
+                BackgroundColor="White"
+                BorderColor="{StaticResource PawPrintGreen}"
+                CornerRadius="3"
+                IsVisible="{Binding ViewRegisteredDogList}">
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToRegisteredDogListViewCommand}" />
+                </Frame.GestureRecognizers>
+
+                <Grid ColumnDefinitions="*,Auto">
+
+                    <Label
+                        Grid.Column="0"
+                        FontFamily="SignikaMedium"
+                        FontSize="15"
+                        Text="View Registered Dog List"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+
+                    <Image
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        HeightRequest="20"
+                        HorizontalOptions="End"
+                        Source="arrow_forward_ios.png"
+                        WidthRequest="20" />
+                </Grid>
+            </Frame>
 
         </VerticalStackLayout>
     </ScrollView>

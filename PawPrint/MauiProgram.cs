@@ -41,7 +41,6 @@ namespace PawPrint
             builder.Services.AddTransient<RegisterOwnershipViewModel>();
 
             builder.Services.AddSingleton<IDialogService, DialogService>();
-
             builder.Services.AddHttpClient<IVerifyOwnershipService, VerifyOwnershipService>();
             builder.Services.AddHttpClient<IAuthenticateService, AuthenticateService>();
             builder.Services.AddHttpClient<IRegisterOwnershipService, RegisterOwnershipService>();

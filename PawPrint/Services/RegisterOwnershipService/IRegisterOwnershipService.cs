@@ -5,5 +5,5 @@ namespace PawPrint.Services.RegisterOwnershipService;
 public interface IRegisterOwnershipService
 {
     Task<int> RegisterOwnershipAsync(MultipartFormDataContent formDataContent);
-    Task<List<Dog>> GetRegisteredDogsByOwnerNICAsync(string nicNo);
+    Task<IEnumerable<Dog>> GetRegisteredDogsByOwnerNICAsync(string nicNo);
 }

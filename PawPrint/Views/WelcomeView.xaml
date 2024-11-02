@@ -52,7 +52,7 @@
                     Padding="10"
                     BackgroundColor="{StaticResource PawPrintGreen}"
                     Command="{Binding RegisterCommand}"
-                    CornerRadius="5"
+                    CornerRadius="3"
                     FontFamily="SignikaMedium"
                     FontSize="17"
                     Text="Register Your Dog"
@@ -66,11 +66,11 @@
                     BorderColor="{StaticResource PawPrintGreen}"
                     BorderWidth="2"
                     Command="{Binding VerifyCommand}"
-                    CornerRadius="5"
+                    CornerRadius="3"
                     FontFamily="SignikaMedium"
                     FontSize="17"
                     Text="Verify Your Ownership"
-                    TextColor="{StaticResource PawPrintGreen}" />
+                    TextColor="Black" />
 
             </VerticalStackLayout>
 
