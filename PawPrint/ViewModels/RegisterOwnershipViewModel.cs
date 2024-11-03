@@ -4,7 +4,6 @@ using PawPrint.Models;
 using PawPrint.Services.DialogService;
 using PawPrint.Services.RegisterOwnershipService;
 using PawPrint.Views;
-using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 
 namespace PawPrint.ViewModels;
@@ -41,7 +40,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
 
     public Stream DogImage { get; set; }
 
-    public ObservableCollection<Dog> RegisteredDogList { get; } = [];
+    public List<Dog> RegisteredDogList { get; set; }
 
     public IAsyncRelayCommand LoadDataCommand { get; }
 
@@ -52,6 +51,14 @@ public partial class RegisterOwnershipViewModel : ObservableObject
 
     [ObservableProperty]
     public string noseImageName;
+
+    //Age (Years & Months Properties)
+    [ObservableProperty]
+    public string years;
+
+    [ObservableProperty]
+    public string months;
+    //
 
     [ObservableProperty]
     public Dog dog = new();
@@ -64,20 +71,20 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     [RelayCommand]
     async Task GoToRegisteredDogListView()
     {
-
+        var param = new ShellNavigationQueryParameters
+        {           
+            { "RegisteredDogList", RegisteredDogList }        
+        };
+        await Shell.Current.GoToAsync(nameof(RegisteredDogListView), param);
     }
 
     private async Task LoadDataAsync()
     {
         var registeredDogs = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync("200023802470");
-        if (registeredDogs.Count() > 0)
+        if (registeredDogs != null)
         {
             ViewRegisteredDogList = true;
-            RegisteredDogList.Clear();
-            foreach (var registeredDog in registeredDogs)
-            {
-                RegisteredDogList.Add(registeredDog);
-            }
+            RegisteredDogList = registeredDogs;
         }
     }
 
@@ -130,6 +137,8 @@ public partial class RegisterOwnershipViewModel : ObservableObject
         Dog = new();
         NoseImage = null;
         NoseImageName = null;
+        Years = null;
+        Months = null;
     }
 
     [RelayCommand]
@@ -137,8 +146,10 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     {
         try
         {
-            if (Dog.Name != null && Dog.Age != null && Dog.Breed != null && NoseImage != null && DogImage != null)
+            if (Dog.Name != null && Years != null && Months != null && Dog.Breed != null && NoseImage != null && DogImage != null)
             {
+                //Set dog age
+                Dog.Age = $"{Years} Years, {Months} Months";
                 using var form = new MultipartFormDataContent
                 {
                     { new StringContent(Dog.Name), "dog_name" },
@@ -169,6 +180,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
                 {
                     await _dialogService.ShowAlertAsync("Information", "Error occured while registering the dog.", "OK");
                 }
+                await LoadDataAsync();
                 ClearFields();
             }
             else

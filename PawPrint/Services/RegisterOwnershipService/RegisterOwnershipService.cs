@@ -30,14 +30,14 @@ public class RegisterOwnershipService : IRegisterOwnershipService
         }
     }
 
-    public async Task<IEnumerable<Dog>> GetRegisteredDogsByOwnerNICAsync(string ownerNIC)
+    public async Task<List<Dog>> GetRegisteredDogsByOwnerNICAsync(string ownerNIC)
     {
         try
         {
             var response = await _httpClient.GetAsync($"registered_dog/{ownerNIC}");
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadFromJsonAsync<IEnumerable<Dog>>();
+                return await response.Content.ReadFromJsonAsync<List<Dog>>();
             }
             return null;
         }

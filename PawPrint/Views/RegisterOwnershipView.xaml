@@ -41,7 +41,7 @@
                     Padding="10"
                     BorderColor="{StaticResource PawPrintGreen}"
                     CornerRadius="50">
-                    
+
                     <ImageButton
                         Grid.Column="1"
                         BackgroundColor="Transparent"
@@ -95,18 +95,54 @@
 
             <Frame
                 Margin="0,8,0,0"
-                Padding="5"
+                Padding="10"
                 BackgroundColor="White"
                 BorderColor="DimGray"
                 CornerRadius="3">
 
-                <local:CustomEntry
-                    FontFamily="SignikaSemiBold"
-                    FontSize="15"
-                    Placeholder="Age"
-                    PlaceholderColor="DimGray"
-                    Text="{Binding Dog.Age}"
-                    TextColor="Black" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".5*" />
+                        <ColumnDefinition Width=".5*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        FontFamily="SignikaMedium"
+                        FontSize="15"
+                        Text="Age (Years &amp; Months)"
+                        TextColor="Black" />
+
+                    <local:CustomEntry
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0,8,0,0"
+                        FontFamily="SignikaSemiBold"
+                        FontSize="15"
+                        Keyboard="Numeric"
+                        Placeholder="Years"
+                        PlaceholderColor="DimGray"
+                        Text="{Binding Years}"
+                        TextColor="Black" />
+
+                    <local:CustomEntry
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0,8,0,0"
+                        FontFamily="SignikaSemiBold"
+                        FontSize="15"
+                        Keyboard="Numeric"
+                        Placeholder="Months"
+                        PlaceholderColor="DimGray"
+                        Text="{Binding Months}"
+                        TextColor="Black" />
+                </Grid>
             </Frame>
 
             <Grid Margin="0,8,0,0" ColumnDefinitions="*,Auto">
@@ -170,9 +206,9 @@
                         Grid.Column="0"
                         FontFamily="SignikaMedium"
                         FontSize="15"
-                        Text="View Registered Dog List"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
+                        HorizontalOptions="Center"
+                        Text="Registered Dog List"
+                        TextColor="Black" />
 
                     <Image
                         Grid.Column="1"

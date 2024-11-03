@@ -9,37 +9,17 @@
 
     <ShellContent ContentTemplate="{DataTemplate local:RegisterOwnershipView}" Route="RegisterOwnershipView" />
 
-    <!--  WelcomeView  -->
-    <!--
-
+    <!--WelcomeView-->
     <ShellContent ContentTemplate="{DataTemplate local:WelcomeView}" Route="WelcomeView" />
-
-
-    -->
-    <!--  LoginView  -->
-    <!--
-
+    <!--LoginView
     <ShellContent ContentTemplate="{DataTemplate local:LoginView}" Route="LoginView" />
-
-
-    -->
-    <!--  SignUpView  -->
-    <!--
-
+    SignUpView
     <ShellContent ContentTemplate="{DataTemplate local:SignUpView}" Route="SignUpView" />
-
-
-    -->
-    <!--  RegisterOwnershipView  -->
-    <!--
-
+    RegisterOwnershipView
     <ShellContent ContentTemplate="{DataTemplate local:RegisterOwnershipView}" Route="RegisterOwnershipView" />
-
-
-    -->
-    <!--  VerifyOwnershipView  -->
-    <!--
-
+    VerifyOwnershipView
     <ShellContent ContentTemplate="{DataTemplate local:VerifyOwnershipView}" Route="VerifyOwnershipView" />-->
+    <!--RegisteredDogListView-->
+    <ShellContent ContentTemplate="{DataTemplate local:RegisteredDogListView}" Route="RegisteredDogListView" />
 
 </Shell>

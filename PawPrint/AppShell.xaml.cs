@@ -12,6 +12,7 @@ namespace PawPrint
             Routing.RegisterRoute(nameof(SignUpView), typeof(SignUpView));
             Routing.RegisterRoute(nameof(VerifyOwnershipView), typeof(VerifyOwnershipView));
             Routing.RegisterRoute(nameof(RegisterOwnershipView), typeof(RegisterOwnershipView));
+            Routing.RegisterRoute(nameof(RegisteredDogListView), typeof(RegisteredDogListView));
         }
     }
 }

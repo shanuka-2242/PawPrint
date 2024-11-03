@@ -1,12 +1,63 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PawPrint.Views.RegisteredDogListView"
-             Title="RegisteredDogListView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="PawPrint.Views.RegisteredDogListView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:PawPrint.ViewModels"
+    x:DataType="vm:RegisteredDogListViewModel"
+    Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="15">
+
+            <ImageButton
+                Margin="10,10,0,25"
+                BackgroundColor="Transparent"
+                Command="{Binding GoBackCommand}"
+                HeightRequest="24"
+                HorizontalOptions="Start"
+                Source="arrow_back_ios.png"
+                WidthRequest="24" />
+
+            <CollectionView ItemsSource="{Binding RegisteredDogList}">
+                <CollectionView.Header>
+                    <StackLayout>
+                        <Label
+                            FontFamily="SignikaMedium"
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Text="Registered Dog List"
+                            TextColor="Black" />
+                    </StackLayout>
+                </CollectionView.Header>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    Aspect="AspectFill"
+                                    HeightRequest="35"
+                                    Source="add_photo.png"
+                                    WidthRequest="35" />
+                                <VerticalStackLayout Grid.Column="1" Margin="10,0,0,0">
+                                    <!--<Label Text="{Binding Name}" />
+                                    <Label Text="{Binding Age}" />
+                                    <Label Text="{Binding Breed}" />-->
+                                    <Label Text="Registered Dog" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
