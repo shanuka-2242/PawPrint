@@ -67,6 +67,7 @@
 	  <None Remove="Resources\Images\arrow_forward_ios.png" />
 	  <None Remove="Resources\Images\image_view.png" />
 	  <None Remove="Resources\Images\logout.png" />
+	  <None Remove="Resources\Images\remove.png" />
 	  <None Remove="Resources\Images\upload_file.png" />
 	</ItemGroup>
 
