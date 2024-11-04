@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using PawPrint.Services.AuthenticateService;
 using PawPrint.Services.DialogService;
+using PawPrint.Services.RegisteredDogListService;
 using PawPrint.Services.RegisterOwnershipService;
 using PawPrint.Services.VerifyOwnershipService;
 using PawPrint.ViewModels;
@@ -47,6 +48,7 @@ namespace PawPrint
             builder.Services.AddHttpClient<IVerifyOwnershipService, VerifyOwnershipService>();
             builder.Services.AddHttpClient<IAuthenticateService, AuthenticateService>();
             builder.Services.AddHttpClient<IRegisterOwnershipService, RegisterOwnershipService>();
+            builder.Services.AddHttpClient<IRegisteredDogListService, RegisteredDogListService>();
 
 #if DEBUG
             builder.Logging.AddDebug();

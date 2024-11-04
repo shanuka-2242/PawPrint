@@ -52,13 +52,15 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     [ObservableProperty]
     public string noseImageName;
 
-    //Age (Years & Months Properties)
+    #region Age (Years & Months Properties)
+
     [ObservableProperty]
     public string years;
 
     [ObservableProperty]
     public string months;
-    //
+
+    #endregion
 
     [ObservableProperty]
     public Dog dog = new();
@@ -71,9 +73,10 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     [RelayCommand]
     async Task GoToRegisteredDogListView()
     {
-        var param = new ShellNavigationQueryParameters
-        {           
-            { "RegisteredDogList", RegisteredDogList }        
+        var param = new Dictionary<string, object>
+        {
+            { "RegisteredDogList", RegisteredDogList },
+            { "LoggedInUserNIC", LoggedInUserNIC }
         };
         await Shell.Current.GoToAsync(nameof(RegisteredDogListView), param);
     }
@@ -85,6 +88,11 @@ public partial class RegisterOwnershipViewModel : ObservableObject
         {
             ViewRegisteredDogList = true;
             RegisteredDogList = registeredDogs;
+        }
+        else
+        {
+            ViewRegisteredDogList = false;
+            RegisteredDogList = null;
         }
     }
 

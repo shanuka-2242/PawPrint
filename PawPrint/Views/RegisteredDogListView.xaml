@@ -26,7 +26,7 @@
                             FontFamily="SignikaMedium"
                             FontSize="18"
                             HorizontalOptions="Start"
-                            Text="Registered Dog List"
+                            Text="My Registered Dog List"
                             TextColor="Black" />
                     </StackLayout>
                 </CollectionView.Header>
@@ -39,6 +39,7 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
@@ -50,27 +51,37 @@
                                     WidthRequest="35" />
                                 <VerticalStackLayout Grid.Column="1" Margin="15,0,0,0">
                                     <Label
-                                        Grid.Row="1"
-                                        Grid.Column="1"
+                                        FontFamily="SignikaRegular"
+                                        FontSize="15"
+                                        Text="Name:" />
+                                    <Label
+                                        FontFamily="SignikaRegular"
+                                        FontSize="15"
+                                        Text="Breed:" />
+                                    <Label
+                                        FontFamily="SignikaRegular"
+                                        FontSize="15"
+                                        Text="Age:" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="2" Margin="15,0,0,0">
+                                    <Label
                                         FontFamily="SignikaRegular"
                                         FontSize="15"
                                         Text="{Binding Name}" />
                                     <Label
-                                        Grid.Row="1"
-                                        Grid.Column="1"
                                         FontFamily="SignikaRegular"
                                         FontSize="15"
                                         Text="{Binding Breed}" />
                                     <Label
-                                        Grid.Row="1"
-                                        Grid.Column="1"
                                         FontFamily="SignikaRegular"
                                         FontSize="15"
                                         Text="{Binding Age}" />
                                 </VerticalStackLayout>
                                 <ImageButton
-                                    Grid.Column="2"
+                                    Grid.Column="3"
                                     BackgroundColor="Transparent"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RegisteredDogListViewModel}}, Path=RemoveRegiteredDogCommand}"
+                                    CommandParameter="{Binding .}"
                                     HeightRequest="24"
                                     Source="remove.png"
                                     VerticalOptions="Center"

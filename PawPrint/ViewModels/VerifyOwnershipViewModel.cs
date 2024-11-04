@@ -58,7 +58,7 @@ public partial class VerifyOwnershipViewModel : ObservableObject
             else
             {
                 SelectedDogNoseImageSource = ImageSource.FromFile("add_photo.png");
-                DogImageSource = ImageSource.FromFile("add_photo.png");
+                DogImageSource = ImageSource.FromFile("image_view.png");
                 IsEnabled = false;
                 VerifiedInfomation = null;
             }
@@ -91,7 +91,7 @@ public partial class VerifyOwnershipViewModel : ObservableObject
 
                 if (result.Dog == null && result.Owner == null)
                 {
-                    await _dialogService.ShowAlertAsync("Information", "No dog is recorded in our database with this biometric.", "OK");
+                    await _dialogService.ShowAlertAsync("Information", "Dog is not recorded in our database with this biometric.", "OK");
                 }
                 else
                 {
