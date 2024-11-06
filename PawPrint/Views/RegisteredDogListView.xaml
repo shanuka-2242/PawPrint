@@ -46,9 +46,9 @@
                                 <Image
                                     Grid.Column="0"
                                     Aspect="AspectFill"
-                                    HeightRequest="35"
-                                    Source="add_photo.png"
-                                    WidthRequest="35" />
+                                    HeightRequest="60"
+                                    Source="{Binding DogImage}"
+                                    WidthRequest="60" />
                                 <VerticalStackLayout Grid.Column="1" Margin="15,0,0,0">
                                     <Label
                                         FontFamily="SignikaRegular"

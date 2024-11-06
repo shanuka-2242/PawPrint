@@ -91,7 +91,7 @@ public partial class VerifyOwnershipViewModel : ObservableObject
 
                 if (result.Dog == null && result.Owner == null)
                 {
-                    await _dialogService.ShowAlertAsync("Information", "Dog is not recorded in our database with this biometric.", "OK");
+                    await _dialogService.ShowAlertAsync("Information", "A dog is not recorded in our database with this biometric.", "OK");
                 }
                 else
                 {

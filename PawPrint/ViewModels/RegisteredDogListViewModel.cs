@@ -17,14 +17,36 @@ namespace PawPrint.ViewModels
 
         [ObservableProperty]
         public List<Dog> registeredDogList = [];
+
+        public List<ImageSource> registeredDogImageListByNIC = [];
+
         public string LoggedInUserNIC { get; private set; }
 
+        public IAsyncRelayCommand LoadRegisteredDogsImagesCommand { get; }
+
         #endregion
+
         public RegisteredDogListViewModel(IDialogService dialogService, IRegisteredDogListService registeredDogListService, IRegisterOwnershipService registerOwnershipService)
         {
             _dialogService = dialogService;
             _registeredDogListService = registeredDogListService;
             _registerOwnershipService = registerOwnershipService;
+            LoadRegisteredDogsImagesCommand = new AsyncRelayCommand(LoadRegisteredImagesAsync);
+        }
+
+        private async Task LoadRegisteredImagesAsync()
+        {
+            var registeredDogsImages = await _registeredDogListService.GetRegisteredDogImagesByNICAsync("200023802470");
+            if (registeredDogsImages != null)
+            {
+                if (registeredDogsImages.Count == RegisteredDogList.Count)
+                {
+                    for (int i = 0; i < RegisteredDogList.Count; i++)
+                    {
+                        RegisteredDogList[i].DogImage = registeredDogsImages[i];
+                    }
+                }
+            }
         }
 
         [RelayCommand]

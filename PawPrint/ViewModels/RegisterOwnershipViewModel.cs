@@ -99,7 +99,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     [RelayCommand]
     async Task LogOut()
     {
-        await Shell.Current.GoToAsync($"//{nameof(WelcomeView)}");
+        await Shell.Current.GoToAsync($"//{nameof(LoginView)}");
     }
 
     [RelayCommand]
