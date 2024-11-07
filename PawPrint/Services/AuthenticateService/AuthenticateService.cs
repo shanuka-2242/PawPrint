@@ -9,7 +9,7 @@ public class AuthenticateService : IAuthenticateService
 
     public AuthenticateService(HttpClient httpClient)
     {
-        httpClient.BaseAddress = new Uri("http://10.0.2.2:8000/");
+        httpClient.BaseAddress = new Uri("http://192.168.1.8:8000/");
         _httpClient = httpClient;
     }
 
