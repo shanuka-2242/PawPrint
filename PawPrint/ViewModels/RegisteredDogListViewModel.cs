@@ -16,9 +16,7 @@ namespace PawPrint.ViewModels
         #region Required Property List
 
         [ObservableProperty]
-        public List<Dog> registeredDogList = [];
-
-        public List<ImageSource> registeredDogImageListByNIC = [];
+        public List<Dog> registeredDogList;
 
         public string LoggedInUserNIC { get; private set; }
 
