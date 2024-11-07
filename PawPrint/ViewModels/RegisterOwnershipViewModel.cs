@@ -8,8 +8,7 @@ using System.Net.Http.Headers;
 
 namespace PawPrint.ViewModels;
 
-[QueryProperty(nameof(LoggedInUserNIC), "LoggedInUserNIC")]
-public partial class RegisterOwnershipViewModel : ObservableObject
+public partial class RegisterOwnershipViewModel : ObservableObject, IQueryAttributable
 {
     private readonly IDialogService _dialogService;
     private readonly IRegisterOwnershipService _registerOwnershipService;
@@ -18,23 +17,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
     {
         _registerOwnershipService = registerOwnershipService;
         _dialogService = dialogService;
-        LoadDataCommand = new AsyncRelayCommand(LoadDataAsync);
     }
-
-    #region Query Param
-
-    string loggedInUserNIC;
-    public string LoggedInUserNIC
-    {
-        get => loggedInUserNIC;
-        set
-        {
-            loggedInUserNIC = value;
-            OnPropertyChanged();
-        }
-    }
-
-    #endregion
 
     #region Required Property List
 
@@ -42,7 +25,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
 
     public List<Dog> RegisteredDogList { get; set; }
 
-    public IAsyncRelayCommand LoadDataCommand { get; }
+    public string LoggedInUserNIC { get; set; }
 
     [ObservableProperty]
     public string dogImageName;
@@ -83,7 +66,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
 
     private async Task LoadDataAsync()
     {
-        var registeredDogs = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync("200023802470");
+        var registeredDogs = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync(LoggedInUserNIC);
         if (registeredDogs != null)
         {
             ViewRegisteredDogList = true;
@@ -163,8 +146,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject
                     { new StringContent(Dog.Name), "dog_name" },
                     { new StringContent(Dog.Breed), "breed" },
                     { new StringContent(Dog.Age), "age" },
-                    //{ new StringContent(LoggedInUserNIC), "owner_nic" }
-                    { new StringContent("200023802470"), "owner_nic" }
+                    { new StringContent(LoggedInUserNIC), "owner_nic" }
                 };
 
                 var noseImageContent = new StreamContent(NoseImage);
@@ -199,6 +181,17 @@ public partial class RegisterOwnershipViewModel : ObservableObject
         catch (Exception)
         {
             await _dialogService.ShowAlertAsync("Information", "Error occured while registering dog.", "OK");
+        }
+    }
+
+    public async void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        LoggedInUserNIC = query["LoggedInUserNIC"] as string;
+        OnPropertyChanged(nameof(LoggedInUserNIC));
+
+        if (LoggedInUserNIC != null)
+        {
+            await LoadDataAsync();
         }
     }
 }

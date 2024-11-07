@@ -1,6 +1,4 @@
-﻿
-
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace PawPrint.Services.RegisteredDogListService;
 
@@ -16,8 +14,8 @@ public class RegisteredDogListService : IRegisteredDogListService
 
     public async Task<bool> RemoveRegisteredDogAsync(int entryId)
     {
-		try
-		{
+        try
+        {
             var response = await _httpClient.DeleteAsync($"registered_dog/{entryId}");
             if (response.IsSuccessStatusCode)
             {
@@ -25,10 +23,10 @@ public class RegisteredDogListService : IRegisteredDogListService
             }
             return false;
         }
-		catch (Exception)
-		{
-			return false;
-		}
+        catch (Exception)
+        {
+            return false;
+        }
     }
 
     public async Task<List<ImageSource>> GetRegisteredDogImagesByNICAsync(string nic)
@@ -41,7 +39,7 @@ public class RegisteredDogListService : IRegisteredDogListService
             {
                 return null;
             }
-            else 
+            else
             {
                 var imagesBase64 = JsonSerializer.Deserialize<List<string>>(response);
                 foreach (var imageBase64 in imagesBase64)

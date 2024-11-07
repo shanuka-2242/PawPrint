@@ -55,7 +55,7 @@ public partial class LoginViewModel : ObservableObject
                 {
                     if (EnteredPassword == loggedinUser.Password)
                     {
-                        var param = new ShellNavigationQueryParameters
+                        var param = new Dictionary<string, object>
                         {
                             { "LoggedInUserNIC", loggedinUser.NIC }
                         };

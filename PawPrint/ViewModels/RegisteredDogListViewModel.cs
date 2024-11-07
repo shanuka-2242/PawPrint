@@ -22,8 +22,6 @@ namespace PawPrint.ViewModels
 
         public string LoggedInUserNIC { get; private set; }
 
-        public IAsyncRelayCommand LoadRegisteredDogsImagesCommand { get; }
-
         #endregion
 
         public RegisteredDogListViewModel(IDialogService dialogService, IRegisteredDogListService registeredDogListService, IRegisterOwnershipService registerOwnershipService)
@@ -31,22 +29,6 @@ namespace PawPrint.ViewModels
             _dialogService = dialogService;
             _registeredDogListService = registeredDogListService;
             _registerOwnershipService = registerOwnershipService;
-            LoadRegisteredDogsImagesCommand = new AsyncRelayCommand(LoadRegisteredImagesAsync);
-        }
-
-        private async Task LoadRegisteredImagesAsync()
-        {
-            var registeredDogsImages = await _registeredDogListService.GetRegisteredDogImagesByNICAsync("200023802470");
-            if (registeredDogsImages != null)
-            {
-                if (registeredDogsImages.Count == RegisteredDogList.Count)
-                {
-                    for (int i = 0; i < RegisteredDogList.Count; i++)
-                    {
-                        //RegisteredDogList[i].DogImage = registeredDogsImages[i];
-                    }
-                }
-            }
         }
 
         [RelayCommand]
@@ -71,7 +53,7 @@ namespace PawPrint.ViewModels
                     {
                         await _dialogService.ShowAlertAsync("Information", "Registered dog removing failed.", "OK");
                     }
-                    RegisteredDogList = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync("200023802470");
+                    RegisteredDogList = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync(LoggedInUserNIC);
                 }
             }
             catch (Exception)
