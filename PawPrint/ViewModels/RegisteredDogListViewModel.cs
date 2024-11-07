@@ -43,7 +43,7 @@ namespace PawPrint.ViewModels
                 {
                     for (int i = 0; i < RegisteredDogList.Count; i++)
                     {
-                        RegisteredDogList[i].DogImage = registeredDogsImages[i];
+                        //RegisteredDogList[i].DogImage = registeredDogsImages[i];
                     }
                 }
             }

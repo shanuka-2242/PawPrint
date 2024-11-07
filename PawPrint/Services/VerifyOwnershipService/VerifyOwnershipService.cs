@@ -29,21 +29,4 @@ public class VerifyOwnershipService : IVerifyOwnershipService
             return null;
         }
     }
-
-    public async Task<byte[]> GetDogImageAsync(int entryId)
-    {
-        try
-        {
-            var response = await _httpClient.GetAsync($"registered_dog_image/{entryId}");
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsByteArrayAsync();
-            }
-            return null;
-        }
-        catch (Exception)
-        {
-            return null;
-        }
-    }
 }

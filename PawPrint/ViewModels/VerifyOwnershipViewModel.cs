@@ -96,12 +96,8 @@ public partial class VerifyOwnershipViewModel : ObservableObject
                 else
                 {
                     VerifiedInfomation = result;
-                    var dogImage = await _verifyOwnershipService.GetDogImageAsync(result.Dog.EntryID);
-                    if (dogImage != null)
-                    {
-                        var stream = new MemoryStream(dogImage);
-                        DogImageSource = ImageSource.FromStream(() => stream);
-                    }
+                    var imageBytes = Convert.FromBase64String(result.Dog.DogImage);
+                    DogImageSource = ImageSource.FromStream(() => new MemoryStream(imageBytes));
                 }
             }
         }
