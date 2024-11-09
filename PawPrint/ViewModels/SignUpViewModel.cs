@@ -63,9 +63,9 @@ public partial class SignUpViewModel : ObservableObject
                         var result = await _authenticateService.SignUpOwnerAsync(form);
                         if (result)
                         {
-                            var param = new ShellNavigationQueryParameters
+                            var param = new Dictionary<string, object>
                             {
-                               { "LoggedInUserNIC", Owner.NIC }
+                                { "LoggedInUserNIC", Owner.NIC }
                             };
 
                             await Shell.Current.GoToAsync($"//{nameof(RegisterOwnershipView)}", param);

@@ -64,7 +64,7 @@
                     Padding="10"
                     BackgroundColor="Transparent"
                     BorderColor="{StaticResource PawPrintGreen}"
-                    BorderWidth="2"
+                    BorderWidth="1"
                     Command="{Binding VerifyCommand}"
                     CornerRadius="3"
                     FontFamily="SignikaMedium"
@@ -79,7 +79,7 @@
                 Grid.Row="1"
                 Margin="0,0,0,6"
                 FontFamily="SignikaSemiBold"
-                FontSize="13."
+                FontSize="13"
                 HorizontalOptions="Center"
                 Text="{Binding CopyrightText}"
                 TextColor="Black" />
