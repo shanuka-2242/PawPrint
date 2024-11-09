@@ -57,7 +57,7 @@
                 FontFamily="SignikaMedium"
                 FontSize="17"
                 Text="Select An Image"
-                TextColor="{StaticResource PawPrintGreen}" />
+                TextColor="Black" />
 
             <!--  Button to Vrify Ownership  -->
             <Button

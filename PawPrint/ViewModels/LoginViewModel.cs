@@ -1,20 +1,19 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PawPrint.Services.AuthenticateService;
-using PawPrint.Services.DialogService;
 using PawPrint.Views;
 
 namespace PawPrint.ViewModels;
 
 public partial class LoginViewModel : ObservableObject
 {
-    private readonly IDialogService _dialogService;
     private readonly IAuthenticateService _authenticateService;
 
-    public LoginViewModel(IDialogService dialogService, IAuthenticateService authenticateService)
+    public LoginViewModel(IAuthenticateService authenticateService)
     {
         CopyrightText = $"® {DateTime.Now.Year} Paw Print Sri Lanka. All rights reserved";
-        _dialogService = dialogService;
         _authenticateService = authenticateService;
     }
 
@@ -64,22 +63,22 @@ public partial class LoginViewModel : ObservableObject
                     }
                     else
                     {
-                        await _dialogService.ShowAlertAsync("Information", "Entered credentials must be wrong please chack again", "OK");
+                        await Toast.Make("Entered credentials must be wrong please chack again.", ToastDuration.Long, 14).Show();
                     }
                 }
                 else
                 {
-                    await _dialogService.ShowAlertAsync("Information", "Entered credentials must be wrong or user doesn't exists.", "OK");
+                    await Toast.Make("Entered credentials must be wrong or user doesn't exists.", ToastDuration.Long, 14).Show();
                 }
             }
             else
             {
-                await _dialogService.ShowAlertAsync("Information", "Entry fields cannot be empty.", "OK");
+                await Toast.Make("Entry fields cannot be empty.", ToastDuration.Long, 14).Show();
             }
         }
         catch (Exception)
         {
-            await _dialogService.ShowAlertAsync("Information", "Error occured while logging into the application", "OK");
+            await Toast.Make("Error occured while logging into the application.", ToastDuration.Long, 14).Show();
         }
     }
 }

@@ -1,19 +1,18 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PawPrint.Models;
-using PawPrint.Services.DialogService;
 using PawPrint.Services.VerifyOwnershipService;
 
 namespace PawPrint.ViewModels;
 
 public partial class VerifyOwnershipViewModel : ObservableObject
 {
-    private readonly IDialogService _dialogService;
     private readonly IVerifyOwnershipService _verifyOwnershipService;
 
-    public VerifyOwnershipViewModel(IDialogService dialogService, IVerifyOwnershipService verifyOwnershipService)
+    public VerifyOwnershipViewModel(IVerifyOwnershipService verifyOwnershipService)
     {
-        _dialogService = dialogService;
         _verifyOwnershipService = verifyOwnershipService;
         SelectedDogNoseImageSource = ImageSource.FromFile("add_photo.png");
         DogImageSource = ImageSource.FromFile("image_view.png");
@@ -65,7 +64,7 @@ public partial class VerifyOwnershipViewModel : ObservableObject
         }
         catch (Exception)
         {
-            await _dialogService.ShowAlertAsync("Information", "Error occured while selecting an image.", "OK");
+            await Toast.Make("Error occured while selecting an image.", ToastDuration.Long, 14).Show();
         }
     }
 
@@ -91,19 +90,18 @@ public partial class VerifyOwnershipViewModel : ObservableObject
 
                 if (result.Dog == null && result.Owner == null)
                 {
-                    await _dialogService.ShowAlertAsync("Information", "A dog is not recorded in our database with this biometric.", "OK");
+                    await Toast.Make("A dog is not recorded in our database with this biometric.", ToastDuration.Long, 14).Show();
                 }
                 else
                 {
                     VerifiedInfomation = result;
-                    var imageBytes = Convert.FromBase64String(result.Dog.DogImage);
-                    DogImageSource = ImageSource.FromStream(() => new MemoryStream(imageBytes));
+                    DogImageSource = VerifiedInfomation.Dog.DogImageSource;
                 }
             }
         }
         catch (Exception)
         {
-            await _dialogService.ShowAlertAsync("Information", "Error occurred while selecting an Image.", "OK");
+            await Toast.Make("Error occured, Please try again.", ToastDuration.Long, 14).Show();
         }
     }
 }

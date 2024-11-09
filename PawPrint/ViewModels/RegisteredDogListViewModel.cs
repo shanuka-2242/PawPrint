@@ -1,7 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PawPrint.Models;
-using PawPrint.Services.DialogService;
 using PawPrint.Services.RegisteredDogListService;
 using PawPrint.Services.RegisterOwnershipService;
 
@@ -11,7 +12,6 @@ namespace PawPrint.ViewModels
     {
         private readonly IRegisteredDogListService _registeredDogListService;
         private readonly IRegisterOwnershipService _registerOwnershipService;
-        private readonly IDialogService _dialogService;
 
         #region Required Property List
 
@@ -22,9 +22,8 @@ namespace PawPrint.ViewModels
 
         #endregion
 
-        public RegisteredDogListViewModel(IDialogService dialogService, IRegisteredDogListService registeredDogListService, IRegisterOwnershipService registerOwnershipService)
+        public RegisteredDogListViewModel(IRegisteredDogListService registeredDogListService, IRegisterOwnershipService registerOwnershipService)
         {
-            _dialogService = dialogService;
             _registeredDogListService = registeredDogListService;
             _registerOwnershipService = registerOwnershipService;
         }
@@ -42,21 +41,25 @@ namespace PawPrint.ViewModels
             {
                 if (dog != null)
                 {
-                    var result = await _registeredDogListService.RemoveRegisteredDogAsync(dog.EntryID);
-                    if (result)
+                    var choice = await Application.Current.MainPage.DisplayAlert("Confirmation", $"Are you sure about removing '{dog.Name}' from the list?", "Yes", "Cancel");
+                    if (choice)
                     {
-                        await _dialogService.ShowAlertAsync("Information", "Registered dog removed sucessfully.", "OK");
+                        var result = await _registeredDogListService.RemoveRegisteredDogAsync(dog.EntryID);
+                        if (result)
+                        {
+                            await Toast.Make("Registered dog removed sucessfully.", ToastDuration.Long, 14).Show();
+                        }
+                        else
+                        {
+                            await Toast.Make("Registered dog removing failed.", ToastDuration.Long, 14).Show();
+                        }
+                        RegisteredDogList = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync(LoggedInUserNIC);
                     }
-                    else
-                    {
-                        await _dialogService.ShowAlertAsync("Information", "Registered dog removing failed.", "OK");
-                    }
-                    RegisteredDogList = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync(LoggedInUserNIC);
                 }
             }
             catch (Exception)
             {
-                await _dialogService.ShowAlertAsync("Information", "Error occured while removing registered dog.", "OK");
+                await Toast.Make("Error occured while removing registered dog.", ToastDuration.Long, 14).Show();
             }
         }
 

@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 using PawPrint.Services.AuthenticateService;
-using PawPrint.Services.DialogService;
 using PawPrint.Services.RegisteredDogListService;
 using PawPrint.Services.RegisterOwnershipService;
 using PawPrint.Services.VerifyOwnershipService;
@@ -16,6 +16,7 @@ namespace PawPrint
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     //Signika font register
@@ -44,7 +45,6 @@ namespace PawPrint
             builder.Services.AddTransient<RegisteredDogListView>();
             builder.Services.AddTransient<RegisteredDogListViewModel>();
 
-            builder.Services.AddSingleton<IDialogService, DialogService>();
             builder.Services.AddHttpClient<IVerifyOwnershipService, VerifyOwnershipService>();
             builder.Services.AddHttpClient<IAuthenticateService, AuthenticateService>();
             builder.Services.AddHttpClient<IRegisterOwnershipService, RegisterOwnershipService>();

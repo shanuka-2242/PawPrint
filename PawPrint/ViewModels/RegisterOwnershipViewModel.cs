@@ -1,7 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PawPrint.Models;
-using PawPrint.Services.DialogService;
 using PawPrint.Services.RegisterOwnershipService;
 using PawPrint.Views;
 using System.Net.Http.Headers;
@@ -10,13 +11,11 @@ namespace PawPrint.ViewModels;
 
 public partial class RegisterOwnershipViewModel : ObservableObject, IQueryAttributable
 {
-    private readonly IDialogService _dialogService;
     private readonly IRegisterOwnershipService _registerOwnershipService;
 
-    public RegisterOwnershipViewModel(IDialogService dialogService, IRegisterOwnershipService registerOwnershipService)
+    public RegisterOwnershipViewModel(IRegisterOwnershipService registerOwnershipService)
     {
         _registerOwnershipService = registerOwnershipService;
-        _dialogService = dialogService;
     }
 
     #region Required Property List
@@ -99,7 +98,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject, IQueryAttrib
         }
         catch (Exception)
         {
-            await _dialogService.ShowAlertAsync("Information", "Error occured while selecting dog image.", "OK");
+            await Toast.Make("Error occured while selecting dog image.", ToastDuration.Long, 14).Show();
         }
     }
 
@@ -117,7 +116,7 @@ public partial class RegisterOwnershipViewModel : ObservableObject, IQueryAttrib
         }
         catch (Exception)
         {
-            await _dialogService.ShowAlertAsync("Information", "Error occured while selecting dog nose image.", "OK");
+            await Toast.Make("Error occured while selecting dog nose image.", ToastDuration.Long, 14).Show();
         }
     }
 
@@ -160,27 +159,27 @@ public partial class RegisterOwnershipViewModel : ObservableObject, IQueryAttrib
                 var result = await _registerOwnershipService.RegisterOwnershipAsync(form);
                 if (result == 200)
                 {
-                    await _dialogService.ShowAlertAsync("Information", "Your dog registered into our system sucessfully.", "OK");
+                    await Toast.Make("Your dog registered into our system sucessfully.", ToastDuration.Long, 14).Show();
                 }
                 else if (result == 400)
                 {
-                    await _dialogService.ShowAlertAsync("Information", "This dog is already registered in our system.", "OK");
+                    await Toast.Make("This dog is already registered in our system.", ToastDuration.Long, 14).Show();
                 }
                 else
                 {
-                    await _dialogService.ShowAlertAsync("Information", "Error occured while registering the dog.", "OK");
+                    await Toast.Make("Error occured while registering the dog.", ToastDuration.Long, 14).Show();
                 }
                 await LoadDataAsync();
                 ClearFields();
             }
             else
             {
-                await _dialogService.ShowAlertAsync("Information", "Entry fields cannot be empty.", "OK");
+                await Toast.Make("Entry fields cannot be empty.", ToastDuration.Long, 14).Show();
             }
         }
         catch (Exception)
         {
-            await _dialogService.ShowAlertAsync("Information", "Error occured while registering dog.", "OK");
+            await Toast.Make("Error occured while registering dog.", ToastDuration.Long, 14).Show();
         }
     }
 

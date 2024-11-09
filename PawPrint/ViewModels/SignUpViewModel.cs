@@ -1,20 +1,19 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PawPrint.Models;
 using PawPrint.Services.AuthenticateService;
-using PawPrint.Services.DialogService;
 using PawPrint.Views;
 
 namespace PawPrint.ViewModels;
 
 public partial class SignUpViewModel : ObservableObject
 {
-    private readonly IDialogService _dialogService;
     private readonly IAuthenticateService _authenticateService;
 
-    public SignUpViewModel(IDialogService dialogService, IAuthenticateService authenticateService)
+    public SignUpViewModel(IAuthenticateService authenticateService)
     {
-        _dialogService = dialogService;
         _authenticateService = authenticateService;
         CopyrightText = $"® {DateTime.Now.Year} Paw Print Sri Lanka. All rights reserved";
     }
@@ -65,35 +64,35 @@ public partial class SignUpViewModel : ObservableObject
                         if (result)
                         {
                             var param = new ShellNavigationQueryParameters
-                           {
+                            {
                                { "LoggedInUserNIC", Owner.NIC }
-                           };
+                            };
 
                             await Shell.Current.GoToAsync($"//{nameof(RegisterOwnershipView)}", param);
                         }
                         else
                         {
-                            await _dialogService.ShowAlertAsync("Information", "Signing up failed.", "OK");
+                            await Toast.Make("Signing up failed.", ToastDuration.Long, 14).Show();
                         }
                     }
                     else
                     {
-                        await _dialogService.ShowAlertAsync("Information", "Confirm Password and Password values are not equal to each other.", "OK");
+                        await Toast.Make("Confirm Password and Password values are not equal to each other.", ToastDuration.Long, 14).Show();
                     }
                 }
                 else
                 {
-                    await _dialogService.ShowAlertAsync("Information", "An owner already logged in under this NIC number.", "OK");
+                    await Toast.Make("An owner already logged in under this NIC number.", ToastDuration.Long, 14).Show();
                 }
             }
             else
             {
-                await _dialogService.ShowAlertAsync("Information", "Entry fields cannot be empty.", "OK");
+                await Toast.Make("Entry fields cannot be empty.", ToastDuration.Long, 14).Show();
             }
         }
         catch (Exception)
         {
-            await _dialogService.ShowAlertAsync("Information", "Error occured while signing into the application", "OK");
+            await Toast.Make("Error occured while signing into the application.", ToastDuration.Long, 14).Show();
         }
     }
 }
