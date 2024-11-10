@@ -34,6 +34,9 @@ public partial class VerifyOwnershipViewModel : ObservableObject
     [ObservableProperty]
     private bool isEnabled;
 
+    [ObservableProperty]
+    private bool isBusy;
+
     #endregion
 
     [RelayCommand]
@@ -86,7 +89,9 @@ public partial class VerifyOwnershipViewModel : ObservableObject
                 };
 
                 // API Call (Request)
+                IsBusy = true;
                 var result = await _verifyOwnershipService.GetOwnerVerifiedInfoAsync(form);
+                IsBusy = false;
 
                 if (result.Dog == null && result.Owner == null)
                 {

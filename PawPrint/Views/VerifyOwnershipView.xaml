@@ -8,271 +8,284 @@
     BackgroundColor="White"
     Shell.NavBarIsVisible="False">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="15" Spacing="10">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="15" Spacing="10">
 
-            <ImageButton
-                Margin="10,10,0,0"
-                BackgroundColor="Transparent"
-                Command="{Binding GoBackCommand}"
-                HeightRequest="24"
-                HorizontalOptions="Start"
-                Source="arrow_back_ios.png"
-                WidthRequest="24" />
-
-            <!--  Display the Selected Image  -->
-            <Frame
-                Margin="0,15,0,0"
-                Padding="5"
-                BackgroundColor="Transparent"
-                BorderColor="Gray"
-                CornerRadius="3"
-                HorizontalOptions="Center">
-
-                <Image
-                    Aspect="AspectFit"
+                <ImageButton
+                    Margin="10,10,0,0"
                     BackgroundColor="Transparent"
-                    HeightRequest="200"
-                    Source="{Binding SelectedDogNoseImageSource}"
-                    WidthRequest="200" />
-            </Frame>
+                    Command="{Binding GoBackCommand}"
+                    HeightRequest="24"
+                    HorizontalOptions="Start"
+                    Source="arrow_back_ios.png"
+                    WidthRequest="24" />
 
-            <Label
-                Margin="0,20,0,0"
-                FontFamily="SignikaRegular"
-                FontSize="15"
-                HorizontalOptions="Center"
-                Text="Please choose a picture of a dog's nose from the gallery to find out who owns it."
-                TextColor="Black" />
-
-            <!--  Button to Select Image  -->
-            <Button
-                Margin="0,25,0,0"
-                Padding="10"
-                BackgroundColor="Transparent"
-                BorderColor="{StaticResource PawPrintGreen}"
-                BorderWidth="1"
-                Command="{Binding SelectImageCommand}"
-                CornerRadius="3"
-                FontFamily="SignikaMedium"
-                FontSize="17"
-                Text="Select An Image"
-                TextColor="Black" />
-
-            <!--  Button to Vrify Ownership  -->
-            <Button
-                Margin="0,5,0,0"
-                Padding="10"
-                BackgroundColor="{StaticResource PawPrintGreen}"
-                Command="{Binding VerifyOwnershipCommand}"
-                CornerRadius="3"
-                FontFamily="SignikaMedium"
-                FontSize="17"
-                IsEnabled="{Binding IsEnabled}"
-                Text="Verify Ownership"
-                TextColor="White" />
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <!--  Dog's Information  -->
+                <!--  Display the Selected Image  -->
                 <Frame
-                    Grid.Row="0"
-                    Margin="0,7,0,0"
-                    CornerRadius="3">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                    Margin="0,15,0,0"
+                    Padding="5"
+                    BackgroundColor="Transparent"
+                    BorderColor="Gray"
+                    CornerRadius="3"
+                    HorizontalOptions="Center">
 
-                        <Label
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Margin="0,0,0,10"
-                            FontFamily="SignikaSemiBold"
-                            FontSize="17"
-                            Text="Dog's Information" />
+                    <Image
+                        Aspect="AspectFit"
+                        BackgroundColor="Transparent"
+                        HeightRequest="200"
+                        Source="{Binding SelectedDogNoseImageSource}"
+                        WidthRequest="200" />
+                </Frame>
 
-                        <Label
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            FontFamily="SignikaMedium"
-                            FontSize="16"
-                            Text="Name" />
+                <Label
+                    Margin="0,20,0,0"
+                    FontFamily="SignikaRegular"
+                    FontSize="15"
+                    HorizontalOptions="Center"
+                    Text="Please choose a picture of a dog's nose from the gallery to find out who owns it."
+                    TextColor="Black" />
 
-                        <Label
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            FontFamily="SignikaRegular"
-                            FontSize="16"
-                            Text="{Binding VerifiedInfomation.Dog.Name}" />
+                <!--  Button to Select Image  -->
+                <Button
+                    Margin="0,25,0,0"
+                    Padding="10"
+                    BackgroundColor="Transparent"
+                    BorderColor="{StaticResource PawPrintGreen}"
+                    BorderWidth="1"
+                    Command="{Binding SelectImageCommand}"
+                    CornerRadius="3"
+                    FontFamily="SignikaMedium"
+                    FontSize="17"
+                    Text="Select An Image"
+                    TextColor="Black" />
 
-                        <Label
-                            Grid.Row="2"
-                            Grid.Column="0"
-                            FontFamily="SignikaMedium"
-                            FontSize="16"
-                            Text="Breed" />
+                <!--  Button to Vrify Ownership  -->
+                <Button
+                    Margin="0,5,0,0"
+                    Padding="10"
+                    BackgroundColor="{StaticResource PawPrintGreen}"
+                    Command="{Binding VerifyOwnershipCommand}"
+                    CornerRadius="3"
+                    FontFamily="SignikaMedium"
+                    FontSize="17"
+                    IsEnabled="{Binding IsEnabled}"
+                    Text="Verify Ownership"
+                    TextColor="White" />
 
-                        <Label
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            FontFamily="SignikaRegular"
-                            FontSize="16"
-                            Text="{Binding VerifiedInfomation.Dog.Breed}" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                        <Label
-                            Grid.Row="3"
-                            Grid.Column="0"
-                            FontFamily="SignikaMedium"
-                            FontSize="16"
-                            Text="Age" />
+                    <!--  Dog's Information  -->
+                    <Frame
+                        Grid.Row="0"
+                        Margin="0,7,0,0"
+                        CornerRadius="3">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <Label
-                            Grid.Row="3"
-                            Grid.Column="1"
-                            FontFamily="SignikaRegular"
-                            FontSize="16"
-                            Text="{Binding VerifiedInfomation.Dog.Age}" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="0,0,0,10"
+                                FontFamily="SignikaSemiBold"
+                                FontSize="17"
+                                Text="Dog's Information" />
 
-                        <Label
-                            Grid.Row="4"
-                            Grid.Column="0"
-                            FontFamily="SignikaMedium"
-                            FontSize="16"
-                            Text="Image" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                FontFamily="SignikaMedium"
+                                FontSize="16"
+                                Text="Name" />
 
-                        <Frame
-                            Grid.Row="4"
-                            Grid.Column="1"
-                            Margin="0,15,0,0"
-                            Padding="5"
-                            BackgroundColor="Transparent"
-                            BorderColor="Gray"
-                            CornerRadius="3">
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                FontFamily="SignikaRegular"
+                                FontSize="16"
+                                Text="{Binding VerifiedInfomation.Dog.Name}" />
 
-                            <Image
-                                Aspect="AspectFit"
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                FontFamily="SignikaMedium"
+                                FontSize="16"
+                                Text="Breed" />
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                FontFamily="SignikaRegular"
+                                FontSize="16"
+                                Text="{Binding VerifiedInfomation.Dog.Breed}" />
+
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                FontFamily="SignikaMedium"
+                                FontSize="16"
+                                Text="Age" />
+
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                FontFamily="SignikaRegular"
+                                FontSize="16"
+                                Text="{Binding VerifiedInfomation.Dog.Age}" />
+
+                            <Label
+                                Grid.Row="4"
+                                Grid.Column="0"
+                                FontFamily="SignikaMedium"
+                                FontSize="16"
+                                Text="Image" />
+
+                            <Frame
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Margin="0,15,0,0"
+                                Padding="5"
                                 BackgroundColor="Transparent"
-                                HeightRequest="150"
-                                Source="{Binding DogImageSource}"
-                                WidthRequest="150" />
-                        </Frame>
+                                BorderColor="Gray"
+                                CornerRadius="3">
 
-                    </Grid>
-                </Frame>
+                                <Image
+                                    Aspect="AspectFit"
+                                    BackgroundColor="Transparent"
+                                    HeightRequest="150"
+                                    Source="{Binding DogImageSource}"
+                                    WidthRequest="150" />
+                            </Frame>
 
-                <!--  Owner's Information  -->
-                <Frame
-                    Grid.Row="1"
-                    Margin="0,10,0,0"
-                    CornerRadius="3">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Frame>
 
-                        <Label
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Margin="0,0,0,10"
-                            FontFamily="SignikaSemiBold"
-                            FontSize="17"
-                            Text="Owner's Information" />
+                    <!--  Owner's Information  -->
+                    <Frame
+                        Grid.Row="1"
+                        Margin="0,10,0,0"
+                        CornerRadius="3">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <Label
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            FontFamily="SignikaMedium"
-                            FontSize="16"
-                            Text="NIC" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="0,0,0,10"
+                                FontFamily="SignikaSemiBold"
+                                FontSize="17"
+                                Text="Owner's Information" />
 
-                        <Label
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            FontFamily="SignikaRegular"
-                            FontSize="16"
-                            Text="{Binding VerifiedInfomation.Owner.NIC}" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                FontFamily="SignikaMedium"
+                                FontSize="16"
+                                Text="NIC" />
 
-                        <Label
-                            Grid.Row="2"
-                            Grid.Column="0"
-                            FontFamily="SignikaMedium"
-                            FontSize="16"
-                            Text="Full Name" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                FontFamily="SignikaRegular"
+                                FontSize="16"
+                                Text="{Binding VerifiedInfomation.Owner.NIC}" />
 
-                        <Label
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            FontFamily="SignikaRegular"
-                            FontSize="16"
-                            Text="{Binding VerifiedInfomation.Owner.FullName}" />
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                FontFamily="SignikaMedium"
+                                FontSize="16"
+                                Text="Full Name" />
 
-                        <Label
-                            Grid.Row="3"
-                            Grid.Column="0"
-                            FontFamily="SignikaMedium"
-                            FontSize="16"
-                            Text="Phone" />
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                FontFamily="SignikaRegular"
+                                FontSize="16"
+                                Text="{Binding VerifiedInfomation.Owner.FullName}" />
 
-                        <Label
-                            Grid.Row="3"
-                            Grid.Column="1"
-                            FontFamily="SignikaRegular"
-                            FontSize="16"
-                            Text="{Binding VerifiedInfomation.Owner.Phone}" />
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                FontFamily="SignikaMedium"
+                                FontSize="16"
+                                Text="Phone" />
 
-                        <Label
-                            Grid.Row="4"
-                            Grid.Column="0"
-                            FontFamily="SignikaMedium"
-                            FontSize="16"
-                            Text="Email" />
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                FontFamily="SignikaRegular"
+                                FontSize="16"
+                                Text="{Binding VerifiedInfomation.Owner.Phone}" />
 
-                        <Label
-                            Grid.Row="4"
-                            Grid.Column="1"
-                            FontFamily="SignikaRegular"
-                            FontSize="16"
-                            Text="{Binding VerifiedInfomation.Owner.Email}" />
+                            <Label
+                                Grid.Row="4"
+                                Grid.Column="0"
+                                FontFamily="SignikaMedium"
+                                FontSize="16"
+                                Text="Email" />
 
-                        <Label
-                            Grid.Row="5"
-                            Grid.Column="0"
-                            FontFamily="SignikaMedium"
-                            FontSize="16"
-                            Text="Current Address" />
+                            <Label
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                FontFamily="SignikaRegular"
+                                FontSize="16"
+                                Text="{Binding VerifiedInfomation.Owner.Email}" />
 
-                        <Label
-                            Grid.Row="5"
-                            Grid.Column="1"
-                            FontFamily="SignikaRegular"
-                            FontSize="16"
-                            Text="{Binding VerifiedInfomation.Owner.CurrentAddress}" />
+                            <Label
+                                Grid.Row="5"
+                                Grid.Column="0"
+                                FontFamily="SignikaMedium"
+                                FontSize="16"
+                                Text="Current Address" />
 
-                    </Grid>
-                </Frame>
-            </Grid>
-        </VerticalStackLayout>
-    </ScrollView>
+                            <Label
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                FontFamily="SignikaRegular"
+                                FontSize="16"
+                                Text="{Binding VerifiedInfomation.Owner.CurrentAddress}" />
+
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Grid IsVisible="{Binding IsBusy}" BackgroundColor="#80000000">
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <ActivityIndicator IsRunning="True" Color="White" />
+                <Label Text="Loading..." 
+                       TextColor="White" 
+                       FontFamily="SignikaRegular"
+                       Margin="10,0,0,0"
+                       VerticalOptions="Center"
+                       FontSize="17"/>
+            </HorizontalStackLayout>
+        </Grid>
+    </Grid>
 </ContentPage>

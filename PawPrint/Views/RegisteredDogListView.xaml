@@ -7,97 +7,95 @@
     xmlns:vm="clr-namespace:PawPrint.ViewModels"
     x:DataType="vm:RegisteredDogListViewModel"
     Shell.NavBarIsVisible="False">
-    <ScrollView>
-        <VerticalStackLayout Padding="15">
+    <VerticalStackLayout Padding="15">
 
-            <ImageButton
-                Margin="10,10,0,25"
-                BackgroundColor="Transparent"
-                Command="{Binding GoBackCommand}"
-                HeightRequest="24"
-                HorizontalOptions="Start"
-                Source="arrow_back_ios.png"
-                WidthRequest="24" />
+        <ImageButton
+            Margin="10,10,0,25"
+            BackgroundColor="Transparent"
+            Command="{Binding GoBackCommand}"
+            HeightRequest="24"
+            HorizontalOptions="Start"
+            Source="arrow_back_ios.png"
+            WidthRequest="24" />
 
-            <CollectionView ItemsSource="{Binding RegisteredDogList}">
-                <CollectionView.Header>
-                    <StackLayout>
-                        <Label
-                            FontFamily="SignikaMedium"
-                            FontSize="18"
-                            HorizontalOptions="Start"
-                            Text="My Registered Dog List"
-                            TextColor="Black" />
-                    </StackLayout>
-                </CollectionView.Header>
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Dog">
-                        <Frame>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Frame 
-                                    Padding="0" 
-                                    CornerRadius="10" 
-                                    BorderColor="Transparent">
-                                    <Image
-                                        Grid.Column="0"
-                                        Aspect="AspectFill"
-                                        HeightRequest="65"
-                                        Source="{Binding DogImageSource}"
-                                        WidthRequest="65" />
-                                </Frame>
+        <CollectionView ItemsSource="{Binding RegisteredDogList}">
+            <CollectionView.Header>
+                <StackLayout>
+                    <Label
+                        FontFamily="SignikaMedium"
+                        FontSize="18"
+                        HorizontalOptions="Start"
+                        Text="My Registered Dog List"
+                        TextColor="Black" />
+                </StackLayout>
+            </CollectionView.Header>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Dog">
+                    <Frame>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Frame
+                                Padding="0"
+                                BorderColor="Transparent"
+                                CornerRadius="10">
+                                <Image
+                                    Grid.Column="0"
+                                    Aspect="AspectFill"
+                                    HeightRequest="65"
+                                    Source="{Binding DogImageSource}"
+                                    WidthRequest="65" />
+                            </Frame>
 
-                                <VerticalStackLayout Grid.Column="1" Margin="15,0,0,0">
-                                    <Label
-                                        FontFamily="SignikaRegular"
-                                        FontSize="15"
-                                        Text="Name:" />
-                                    <Label
-                                        FontFamily="SignikaRegular"
-                                        FontSize="15"
-                                        Text="Breed:" />
-                                    <Label
-                                        FontFamily="SignikaRegular"
-                                        FontSize="15"
-                                        Text="Age:" />
-                                </VerticalStackLayout>
-                                <VerticalStackLayout Grid.Column="2" Margin="15,0,0,0">
-                                    <Label
-                                        FontFamily="SignikaRegular"
-                                        FontSize="15"
-                                        Text="{Binding Name}" />
-                                    <Label
-                                        FontFamily="SignikaRegular"
-                                        FontSize="15"
-                                        Text="{Binding Breed}" />
-                                    <Label
-                                        FontFamily="SignikaRegular"
-                                        FontSize="15"
-                                        Text="{Binding Age}" />
-                                </VerticalStackLayout>
-                                <ImageButton
-                                    Grid.Column="3"
-                                    BackgroundColor="Transparent"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RegisteredDogListViewModel}}, Path=RemoveRegiteredDogCommand}"
-                                    CommandParameter="{Binding .}"
-                                    HeightRequest="24"
-                                    Source="remove.png"
-                                    VerticalOptions="Center"
-                                    WidthRequest="24" />
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                            <VerticalStackLayout Grid.Column="1" Margin="15,0,0,0">
+                                <Label
+                                    FontFamily="SignikaRegular"
+                                    FontSize="15"
+                                    Text="Name:" />
+                                <Label
+                                    FontFamily="SignikaRegular"
+                                    FontSize="15"
+                                    Text="Breed:" />
+                                <Label
+                                    FontFamily="SignikaRegular"
+                                    FontSize="15"
+                                    Text="Age:" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2" Margin="15,0,0,0">
+                                <Label
+                                    FontFamily="SignikaRegular"
+                                    FontSize="15"
+                                    Text="{Binding Name}" />
+                                <Label
+                                    FontFamily="SignikaRegular"
+                                    FontSize="15"
+                                    Text="{Binding Breed}" />
+                                <Label
+                                    FontFamily="SignikaRegular"
+                                    FontSize="15"
+                                    Text="{Binding Age}" />
+                            </VerticalStackLayout>
+                            <ImageButton
+                                Grid.Column="3"
+                                BackgroundColor="Transparent"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:RegisteredDogListViewModel}}, Path=RemoveRegiteredDogCommand}"
+                                CommandParameter="{Binding .}"
+                                HeightRequest="24"
+                                Source="remove.png"
+                                VerticalOptions="Center"
+                                WidthRequest="24" />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-        </VerticalStackLayout>
-    </ScrollView>
+    </VerticalStackLayout>
 </ContentPage>
