@@ -53,6 +53,8 @@ public partial class VerifyOwnershipViewModel : ObservableObject
             SelectedDogNoseImage = await MediaPicker.PickPhotoAsync();
             if (SelectedDogNoseImage != null)
             {
+                VerifiedInfomation = null;
+                DogImageSource = ImageSource.FromFile("image_view.png");
                 IsEnabled = true;
                 var stream = await SelectedDogNoseImage.OpenReadAsync();
                 SelectedDogNoseImageSource = ImageSource.FromStream(() => stream);
@@ -67,7 +69,7 @@ public partial class VerifyOwnershipViewModel : ObservableObject
         }
         catch (Exception)
         {
-            await Toast.Make("Error occured while selecting an image.", ToastDuration.Long, 14).Show();
+            await Toast.Make("Error occured while selecting an image", ToastDuration.Long, 14).Show();
         }
     }
 
@@ -95,7 +97,7 @@ public partial class VerifyOwnershipViewModel : ObservableObject
 
                 if (result.Dog == null && result.Owner == null)
                 {
-                    await Toast.Make("A dog is not recorded in our database with this biometric.", ToastDuration.Long, 14).Show();
+                    await Toast.Make("A dog is not recorded in our database with this biometric", ToastDuration.Long, 14).Show();
                 }
                 else
                 {
@@ -106,7 +108,7 @@ public partial class VerifyOwnershipViewModel : ObservableObject
         }
         catch (Exception)
         {
-            await Toast.Make("Error occured, Please try again.", ToastDuration.Long, 14).Show();
+            await Toast.Make("Error occured, Please try again", ToastDuration.Long, 14).Show();
         }
     }
 }

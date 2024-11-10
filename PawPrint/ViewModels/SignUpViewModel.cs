@@ -72,27 +72,27 @@ public partial class SignUpViewModel : ObservableObject
                         }
                         else
                         {
-                            await Toast.Make("Signing up failed.", ToastDuration.Long, 14).Show();
+                            await Toast.Make("Signing up failed", ToastDuration.Long, 14).Show();
                         }
                     }
                     else
                     {
-                        await Toast.Make("Confirm Password and Password values are not equal to each other.", ToastDuration.Long, 14).Show();
+                        await Toast.Make("Confirm Password and Password values are not equal to each other", ToastDuration.Long, 14).Show();
                     }
                 }
                 else
                 {
-                    await Toast.Make("An owner already logged in under this NIC number.", ToastDuration.Long, 14).Show();
+                    await Toast.Make("An owner already logged in under this NIC number", ToastDuration.Long, 14).Show();
                 }
             }
             else
             {
-                await Toast.Make("Entry fields cannot be empty.", ToastDuration.Long, 14).Show();
+                await Toast.Make("Entry fields cannot be empty", ToastDuration.Long, 14).Show();
             }
         }
         catch (Exception)
         {
-            await Toast.Make("Error occured while signing into the application.", ToastDuration.Long, 14).Show();
+            await Toast.Make("Error occured while signing into the application", ToastDuration.Long, 14).Show();
         }
     }
 }

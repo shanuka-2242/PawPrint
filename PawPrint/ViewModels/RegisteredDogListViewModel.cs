@@ -47,11 +47,11 @@ namespace PawPrint.ViewModels
                         var result = await _registeredDogListService.RemoveRegisteredDogAsync(dog.EntryID);
                         if (result)
                         {
-                            await Toast.Make("Registered dog removed sucessfully.", ToastDuration.Long, 14).Show();
+                            await Toast.Make("Registered dog removed sucessfully", ToastDuration.Long, 14).Show();
                         }
                         else
                         {
-                            await Toast.Make("Registered dog removing failed.", ToastDuration.Long, 14).Show();
+                            await Toast.Make("Registered dog removing failed", ToastDuration.Long, 14).Show();
                         }
                         RegisteredDogList = await _registerOwnershipService.GetRegisteredDogsByOwnerNICAsync(LoggedInUserNIC);
                     }
@@ -59,7 +59,7 @@ namespace PawPrint.ViewModels
             }
             catch (Exception)
             {
-                await Toast.Make("Error occured while removing registered dog.", ToastDuration.Long, 14).Show();
+                await Toast.Make("Error occured while removing registered dog", ToastDuration.Long, 14).Show();
             }
         }
 

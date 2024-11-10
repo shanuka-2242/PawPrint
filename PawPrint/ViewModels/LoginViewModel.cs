@@ -63,22 +63,22 @@ public partial class LoginViewModel : ObservableObject
                     }
                     else
                     {
-                        await Toast.Make("Entered credentials must be wrong please chack again.", ToastDuration.Long, 14).Show();
+                        await Toast.Make("Entered credentials must be wrong please chack again", ToastDuration.Long, 14).Show();
                     }
                 }
                 else
                 {
-                    await Toast.Make("Entered credentials must be wrong or user doesn't exists.", ToastDuration.Long, 14).Show();
+                    await Toast.Make("Entered credentials must be wrong or user doesn't exists", ToastDuration.Long, 14).Show();
                 }
             }
             else
             {
-                await Toast.Make("Entry fields cannot be empty.", ToastDuration.Long, 14).Show();
+                await Toast.Make("Entry fields cannot be empty", ToastDuration.Long, 14).Show();
             }
         }
         catch (Exception)
         {
-            await Toast.Make("Error occured while logging into the application.", ToastDuration.Long, 14).Show();
+            await Toast.Make("Error occured while logging into the application", ToastDuration.Long, 14).Show();
         }
     }
 }
