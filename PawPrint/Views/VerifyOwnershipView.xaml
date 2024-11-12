@@ -276,15 +276,16 @@
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>
-        <Grid IsVisible="{Binding IsBusy}" BackgroundColor="#80000000">
+        <Grid BackgroundColor="#80000000" IsVisible="{Binding IsBusy}">
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <ActivityIndicator IsRunning="True" Color="White" />
-                <Label Text="Loading..." 
-                       TextColor="White" 
-                       FontFamily="SignikaRegular"
-                       Margin="10,0,0,0"
-                       VerticalOptions="Center"
-                       FontSize="17"/>
+                <Label
+                    Margin="10,0,0,0"
+                    FontFamily="SignikaRegular"
+                    FontSize="17"
+                    Text="Loading..."
+                    TextColor="White"
+                    VerticalOptions="Center" />
             </HorizontalStackLayout>
         </Grid>
     </Grid>

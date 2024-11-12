@@ -28,6 +28,9 @@ public partial class LoginViewModel : ObservableObject
     [ObservableProperty]
     private string enteredPassword;
 
+    [ObservableProperty]
+    private bool isBusy;
+
     #endregion
 
     [RelayCommand]
@@ -49,7 +52,10 @@ public partial class LoginViewModel : ObservableObject
         {
             if (EnteredNIC != null && EnteredPassword != null)
             {
+                IsBusy = true;
                 var loggedinUser = await _authenticateService.GetOwnerByNICAsync(EnteredNIC);
+                IsBusy = false;
+
                 if (loggedinUser != null)
                 {
                     if (EnteredPassword == loggedinUser.Password)

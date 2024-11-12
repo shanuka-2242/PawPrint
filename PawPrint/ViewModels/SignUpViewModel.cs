@@ -29,6 +29,9 @@ public partial class SignUpViewModel : ObservableObject
     [ObservableProperty]
     private Owner owner = new();
 
+    [ObservableProperty]
+    private bool isBusy;
+
     #endregion
 
     [RelayCommand]
@@ -60,7 +63,10 @@ public partial class SignUpViewModel : ObservableObject
                             { new StringContent(Owner.Password), "password" }
                         };
 
+                        IsBusy = true;
                         var result = await _authenticateService.SignUpOwnerAsync(form);
+                        IsBusy = false;
+
                         if (result)
                         {
                             var param = new Dictionary<string, object>

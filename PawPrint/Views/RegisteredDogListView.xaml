@@ -34,7 +34,7 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Dog">
-                    <Frame>
+                    <Frame CornerRadius="5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -43,11 +43,11 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Frame
+                                Grid.Column="0"
                                 Padding="0"
                                 BorderColor="Transparent"
                                 CornerRadius="10">
                                 <Image
-                                    Grid.Column="0"
                                     Aspect="AspectFill"
                                     HeightRequest="65"
                                     Source="{Binding DogImageSource}"

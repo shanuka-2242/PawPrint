@@ -7,218 +7,231 @@
     xmlns:vm="clr-namespace:PawPrint.ViewModels"
     x:DataType="vm:RegisterOwnershipViewModel"
     Shell.NavBarIsVisible="False">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="15" Spacing="10">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="15" Spacing="10">
-
-            <ImageButton
-                Margin="0,10,10,0"
-                BackgroundColor="Transparent"
-                Command="{Binding LogOutCommand}"
-                HeightRequest="25"
-                HorizontalOptions="End"
-                Source="logout.png"
-                WidthRequest="25" />
-
-            <Label
-                Margin="0,10,0,0"
-                FontFamily="SignikaSemiBold"
-                FontSize="25"
-                Text="Register your Dog" />
-
-            <Grid Margin="0,30,0,0" ColumnDefinitions="*,Auto">
+                <ImageButton
+                    Margin="0,10,10,0"
+                    BackgroundColor="Transparent"
+                    Command="{Binding LogOutCommand}"
+                    HeightRequest="25"
+                    HorizontalOptions="End"
+                    Source="logout.png"
+                    WidthRequest="25" />
 
                 <Label
-                    Grid.Column="0"
-                    FontFamily="SignikaMedium"
-                    FontSize="15"
-                    Text="Attach your dog's Image"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-
-                <Frame
-                    Grid.Column="1"
-                    Padding="10"
-                    BorderColor="{StaticResource PawPrintGreen}"
-                    CornerRadius="50">
-
-                    <ImageButton
-                        Grid.Column="1"
-                        BackgroundColor="Transparent"
-                        Command="{Binding AttachDogImageCommand}"
-                        HeightRequest="25"
-                        Source="upload_file.png"
-                        WidthRequest="25" />
-                </Frame>
-            </Grid>
-
-            <Label
-                Margin="0,8,0,0"
-                FontFamily="SignikaRegular"
-                FontSize="15"
-                Text="{Binding DogImageName}"
-                TextColor="DimGrey"
-                VerticalOptions="Center" />
-
-            <Frame
-                Margin="0,8,0,0"
-                Padding="5"
-                BackgroundColor="White"
-                BorderColor="DimGray"
-                CornerRadius="3">
-
-                <local:CustomEntry
+                    Margin="0,10,0,0"
                     FontFamily="SignikaSemiBold"
-                    FontSize="15"
-                    Placeholder="Dog's Name"
-                    PlaceholderColor="DimGray"
-                    Text="{Binding Dog.Name}"
-                    TextColor="Black" />
-            </Frame>
+                    FontSize="25"
+                    Text="Register your Dog" />
 
-            <Frame
-                Margin="0,8,0,0"
-                Padding="5"
-                BackgroundColor="White"
-                BorderColor="DimGray"
-                CornerRadius="3">
-
-                <local:CustomEntry
-                    FontFamily="SignikaSemiBold"
-                    FontSize="15"
-                    Placeholder="Breed"
-                    PlaceholderColor="DimGray"
-                    Text="{Binding Dog.Breed}"
-                    TextColor="Black" />
-            </Frame>
-
-            <Frame
-                Margin="0,8,0,0"
-                Padding="10"
-                BackgroundColor="White"
-                BorderColor="DimGray"
-                CornerRadius="3">
-
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".5*" />
-                        <ColumnDefinition Width=".5*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        FontFamily="SignikaMedium"
-                        FontSize="15"
-                        Text="Age (Years &amp; Months)"
-                        TextColor="Black" />
-
-                    <local:CustomEntry
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Margin="0,8,0,0"
-                        FontFamily="SignikaSemiBold"
-                        FontSize="15"
-                        Keyboard="Numeric"
-                        Placeholder="Years"
-                        PlaceholderColor="DimGray"
-                        Text="{Binding Years}"
-                        TextColor="Black" />
-
-                    <local:CustomEntry
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Margin="0,8,0,0"
-                        FontFamily="SignikaSemiBold"
-                        FontSize="15"
-                        Keyboard="Numeric"
-                        Placeholder="Months"
-                        PlaceholderColor="DimGray"
-                        Text="{Binding Months}"
-                        TextColor="Black" />
-                </Grid>
-            </Frame>
-
-            <Grid Margin="0,8,0,0" ColumnDefinitions="*,Auto">
-
-                <Label
-                    Grid.Column="0"
-                    FontFamily="SignikaMedium"
-                    FontSize="15"
-                    Text="Attach your dog's nose Image"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-
-                <Frame
-                    Grid.Column="1"
-                    Padding="10"
-                    BorderColor="{StaticResource PawPrintGreen}"
-                    CornerRadius="50">
-                    <ImageButton
-                        Grid.Column="1"
-                        BackgroundColor="Transparent"
-                        Command="{Binding AttachDogNoseImageCommand}"
-                        HeightRequest="25"
-                        Source="upload_file.png"
-                        WidthRequest="25" />
-                </Frame>
-            </Grid>
-
-            <Label
-                Margin="0,8,0,0"
-                FontFamily="SignikaRegular"
-                FontSize="15"
-                Text="{Binding NoseImageName}"
-                TextColor="DimGrey" />
-
-            <Button
-                Margin="0,20,0,0"
-                Padding="10"
-                BackgroundColor="{StaticResource PawPrintGreen}"
-                Command="{Binding RegisterDogCommand}"
-                CornerRadius="3"
-                FontFamily="SignikaMedium"
-                FontSize="17"
-                Text="Register"
-                TextColor="White" />
-
-            <Frame
-                Margin="0,5,0,0"
-                Padding="10"
-                BackgroundColor="White"
-                BorderColor="{StaticResource PawPrintGreen}"
-                CornerRadius="3"
-                IsVisible="{Binding ViewRegisteredDogList}">
-
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding GoToRegisteredDogListViewCommand}" />
-                </Frame.GestureRecognizers>
-
-                <Grid ColumnDefinitions="*,Auto">
+                <Grid Margin="0,30,0,0" ColumnDefinitions="*,Auto">
 
                     <Label
                         Grid.Column="0"
                         FontFamily="SignikaMedium"
                         FontSize="15"
-                        HorizontalOptions="Center"
-                        Text="Registered Dog List"
-                        TextColor="Black" />
+                        Text="Attach your dog's Image"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
 
-                    <Image
+                    <Frame
                         Grid.Column="1"
-                        BackgroundColor="Transparent"
-                        HeightRequest="20"
-                        HorizontalOptions="End"
-                        Source="arrow_forward_ios.png"
-                        WidthRequest="20" />
-                </Grid>
-            </Frame>
+                        Padding="10"
+                        BorderColor="{StaticResource PawPrintGreen}"
+                        CornerRadius="50">
 
-        </VerticalStackLayout>
-    </ScrollView>
+                        <ImageButton
+                            Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            Command="{Binding AttachDogImageCommand}"
+                            HeightRequest="25"
+                            Source="upload_file.png"
+                            WidthRequest="25" />
+                    </Frame>
+                </Grid>
+
+                <Label
+                    Margin="0,8,0,0"
+                    FontFamily="SignikaRegular"
+                    FontSize="15"
+                    Text="{Binding DogImageName}"
+                    TextColor="DimGrey"
+                    VerticalOptions="Center" />
+
+                <Frame
+                    Margin="0,8,0,0"
+                    Padding="5"
+                    BackgroundColor="White"
+                    BorderColor="DimGray"
+                    CornerRadius="3">
+
+                    <local:CustomEntry
+                        FontFamily="SignikaSemiBold"
+                        FontSize="15"
+                        Placeholder="Dog's Name"
+                        PlaceholderColor="DimGray"
+                        Text="{Binding Dog.Name}"
+                        TextColor="Black" />
+                </Frame>
+
+                <Frame
+                    Margin="0,8,0,0"
+                    Padding="5"
+                    BackgroundColor="White"
+                    BorderColor="DimGray"
+                    CornerRadius="3">
+
+                    <local:CustomEntry
+                        FontFamily="SignikaSemiBold"
+                        FontSize="15"
+                        Placeholder="Breed"
+                        PlaceholderColor="DimGray"
+                        Text="{Binding Dog.Breed}"
+                        TextColor="Black" />
+                </Frame>
+
+                <Frame
+                    Margin="0,8,0,0"
+                    Padding="10"
+                    BackgroundColor="White"
+                    BorderColor="DimGray"
+                    CornerRadius="3">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*" />
+                            <ColumnDefinition Width=".5*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            FontFamily="SignikaMedium"
+                            FontSize="15"
+                            Text="Age (Years &amp; Months)"
+                            TextColor="Black" />
+
+                        <local:CustomEntry
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,8,0,0"
+                            FontFamily="SignikaSemiBold"
+                            FontSize="15"
+                            Keyboard="Numeric"
+                            Placeholder="Years"
+                            PlaceholderColor="DimGray"
+                            Text="{Binding Years}"
+                            TextColor="Black" />
+
+                        <local:CustomEntry
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,8,0,0"
+                            FontFamily="SignikaSemiBold"
+                            FontSize="15"
+                            Keyboard="Numeric"
+                            Placeholder="Months"
+                            PlaceholderColor="DimGray"
+                            Text="{Binding Months}"
+                            TextColor="Black" />
+                    </Grid>
+                </Frame>
+
+                <Grid Margin="0,8,0,0" ColumnDefinitions="*,Auto">
+
+                    <Label
+                        Grid.Column="0"
+                        FontFamily="SignikaMedium"
+                        FontSize="15"
+                        Text="Attach your dog's nose Image"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+
+                    <Frame
+                        Grid.Column="1"
+                        Padding="10"
+                        BorderColor="{StaticResource PawPrintGreen}"
+                        CornerRadius="50">
+                        <ImageButton
+                            Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            Command="{Binding AttachDogNoseImageCommand}"
+                            HeightRequest="25"
+                            Source="upload_file.png"
+                            WidthRequest="25" />
+                    </Frame>
+                </Grid>
+
+                <Label
+                    Margin="0,8,0,0"
+                    FontFamily="SignikaRegular"
+                    FontSize="15"
+                    Text="{Binding NoseImageName}"
+                    TextColor="DimGrey" />
+
+                <Button
+                    Margin="0,20,0,0"
+                    Padding="10"
+                    BackgroundColor="{StaticResource PawPrintGreen}"
+                    Command="{Binding RegisterDogCommand}"
+                    CornerRadius="3"
+                    FontFamily="SignikaMedium"
+                    FontSize="17"
+                    Text="Register"
+                    TextColor="White" />
+
+                <Frame
+                    Margin="0,5,0,0"
+                    Padding="10"
+                    BackgroundColor="White"
+                    BorderColor="{StaticResource PawPrintGreen}"
+                    CornerRadius="3"
+                    IsVisible="{Binding ViewRegisteredDogList}">
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToRegisteredDogListViewCommand}" />
+                    </Frame.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <Label
+                            Grid.Column="0"
+                            FontFamily="SignikaMedium"
+                            FontSize="15"
+                            HorizontalOptions="Center"
+                            Text="Registered Dog List"
+                            TextColor="Black" />
+
+                        <Image
+                            Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            HeightRequest="20"
+                            HorizontalOptions="End"
+                            Source="arrow_forward_ios.png"
+                            WidthRequest="20" />
+                    </Grid>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+        <Grid BackgroundColor="#80000000" IsVisible="{Binding IsBusy}">
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <ActivityIndicator IsRunning="True" Color="White" />
+                <Label
+                    Margin="10,0,0,0"
+                    FontFamily="SignikaRegular"
+                    FontSize="17"
+                    Text="Loading..."
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Grid>
 </ContentPage>

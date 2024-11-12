@@ -20,6 +20,9 @@ public partial class RegisterOwnershipViewModel : ObservableObject, IQueryAttrib
 
     #region Required Property List
 
+    [ObservableProperty]
+    private bool isBusy;
+
     public Stream DogImage { get; set; }
 
     public List<Dog> RegisteredDogList { get; set; }
@@ -81,7 +84,11 @@ public partial class RegisterOwnershipViewModel : ObservableObject, IQueryAttrib
     [RelayCommand]
     async Task LogOut()
     {
-        await Shell.Current.GoToAsync($"//{nameof(LoginView)}");
+        var choice = await Application.Current.MainPage.DisplayAlert("Confirmation", "Are you sure about logging out?", "Yes", "Cancel");
+        if (choice)
+        {
+            await Shell.Current.GoToAsync($"//{nameof(WelcomeView)}");
+        }
     }
 
     [RelayCommand]
@@ -156,7 +163,10 @@ public partial class RegisterOwnershipViewModel : ObservableObject, IQueryAttrib
                 dogImageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
                 form.Add(dogImageContent, "dog_image", DogImageName);
 
+                IsBusy = true;
                 var result = await _registerOwnershipService.RegisterOwnershipAsync(form);
+                IsBusy = false;
+
                 if (result == 200)
                 {
                     await Toast.Make("Your dog registered into our system sucessfully", ToastDuration.Long, 14).Show();

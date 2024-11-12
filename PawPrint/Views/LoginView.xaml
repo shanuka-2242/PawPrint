@@ -9,122 +9,136 @@
     BackgroundColor="White"
     Shell.NavBarIsVisible="False">
 
-    <ScrollView>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+    <Grid>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            <VerticalStackLayout
-                Grid.Row="0"
-                Padding="15"
-                Spacing="10">
+                <VerticalStackLayout
+                    Grid.Row="0"
+                    Padding="15"
+                    Spacing="10">
 
-                <ImageButton
-                    Margin="10,10,0,0"
-                    BackgroundColor="Transparent"
-                    Command="{Binding GoBackCommand}"
-                    HeightRequest="24"
-                    HorizontalOptions="Start"
-                    Source="arrow_back_ios.png"
-                    WidthRequest="24" />
+                    <ImageButton
+                        Margin="10,10,0,0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding GoBackCommand}"
+                        HeightRequest="24"
+                        HorizontalOptions="Start"
+                        Source="arrow_back_ios.png"
+                        WidthRequest="24" />
 
-                <!--  Logo Image  -->
-                <Image
-                    Margin="0,0,0,0"
-                    Aspect="AspectFill"
-                    HeightRequest="250"
-                    HorizontalOptions="Center"
-                    Source="applogo.png"
-                    VerticalOptions="Center"
-                    WidthRequest="250" />
+                    <!--  Logo Image  -->
+                    <Image
+                        Margin="0,0,0,0"
+                        Aspect="AspectFill"
+                        HeightRequest="250"
+                        HorizontalOptions="Center"
+                        Source="applogo.png"
+                        VerticalOptions="Center"
+                        WidthRequest="250" />
 
-                <!--  Headline  -->
-                <Label
-                    FontFamily="SignikaMedium"
-                    FontSize="18"
-                    HorizontalOptions="Start"
-                    Text="LogIn to your Owner Account"
-                    TextColor="Black" />
-
-                <!--  NIC No Field  -->
-                <Frame
-                    Margin="0,12,0,0"
-                    Padding="5"
-                    BackgroundColor="White"
-                    BorderColor="DimGray"
-                    CornerRadius="3">
-
-                    <local:CustomEntry
-                        FontFamily="SignikaSemiBold"
-                        FontSize="15"
-                        Placeholder="NIC No"
-                        PlaceholderColor="DimGray"
-                        Text="{Binding EnteredNIC}"
-                        TextColor="Black" />
-                </Frame>
-
-                <!--  Password Field  -->
-                <Frame
-                    Padding="5"
-                    BackgroundColor="White"
-                    BorderColor="DimGray"
-                    CornerRadius="3">
-
-                    <local:CustomEntry
-                        FontFamily="SignikaMedium"
-                        FontSize="15"
-                        IsPassword="True"
-                        Placeholder="Password"
-                        PlaceholderColor="DimGray"
-                        Text="{Binding EnteredPassword}"
-                        TextColor="Black" />
-                </Frame>
-
-                <!--  LogIn Button  -->
-                <Button
-                    Margin="0,20,0,0"
-                    Padding="10"
-                    BackgroundColor="{StaticResource PawPrintGreen}"
-                    Command="{Binding LogInCommand}"
-                    CornerRadius="3"
-                    FontFamily="SignikaMedium"
-                    FontSize="17"
-                    Text="LogIn"
-                    TextColor="White" />
-
-                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <!--  Headline  -->
                     <Label
                         FontFamily="SignikaMedium"
-                        FontSize="15"
-                        Text="Don't have an account?"
-                        TextColor="Black"
-                        VerticalOptions="Center" />
+                        FontSize="18"
+                        HorizontalOptions="Start"
+                        Text="LogIn to your Owner Account"
+                        TextColor="Black" />
 
+                    <!--  NIC No Field  -->
+                    <Frame
+                        Margin="0,12,0,0"
+                        Padding="5"
+                        BackgroundColor="White"
+                        BorderColor="DimGray"
+                        CornerRadius="3">
+
+                        <local:CustomEntry
+                            FontFamily="SignikaSemiBold"
+                            FontSize="15"
+                            Placeholder="NIC No"
+                            PlaceholderColor="DimGray"
+                            Text="{Binding EnteredNIC}"
+                            TextColor="Black" />
+                    </Frame>
+
+                    <!--  Password Field  -->
+                    <Frame
+                        Padding="5"
+                        BackgroundColor="White"
+                        BorderColor="DimGray"
+                        CornerRadius="3">
+
+                        <local:CustomEntry
+                            FontFamily="SignikaMedium"
+                            FontSize="15"
+                            IsPassword="True"
+                            Placeholder="Password"
+                            PlaceholderColor="DimGray"
+                            Text="{Binding EnteredPassword}"
+                            TextColor="Black" />
+                    </Frame>
+
+                    <!--  LogIn Button  -->
                     <Button
-                        Padding="0"
-                        BackgroundColor="Transparent"
-                        BorderWidth="0"
-                        Command="{Binding GoToSignUpPageCommand}"
+                        Margin="0,20,0,0"
+                        Padding="10"
+                        BackgroundColor="{StaticResource PawPrintGreen}"
+                        Command="{Binding LogInCommand}"
+                        CornerRadius="3"
                         FontFamily="SignikaMedium"
-                        Text="SignUp"
-                        TextColor="{StaticResource PawPrintGreen}"
-                        VerticalOptions="Center" />
-                </HorizontalStackLayout>
+                        FontSize="17"
+                        Text="LogIn"
+                        TextColor="White" />
 
-            </VerticalStackLayout>
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <Label
+                            FontFamily="SignikaMedium"
+                            FontSize="15"
+                            Text="Don't have an account?"
+                            TextColor="Black"
+                            VerticalOptions="Center" />
 
-            <!--  All right reserved lable  -->
-            <Label
-                Grid.Row="1"
-                Margin="0,0,0,6"
-                FontFamily="SignikaSemiBold"
-                FontSize="13."
-                HorizontalOptions="Center"
-                Text="{Binding CopyrightText}"
-                TextColor="Black" />
+                        <Button
+                            Padding="0"
+                            BackgroundColor="Transparent"
+                            BorderWidth="0"
+                            Command="{Binding GoToSignUpPageCommand}"
+                            FontFamily="SignikaMedium"
+                            Text="SignUp"
+                            TextColor="{StaticResource PawPrintGreen}"
+                            VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
+                </VerticalStackLayout>
+
+                <!--  All right reserved lable  -->
+                <Label
+                    Grid.Row="1"
+                    Margin="0,0,0,6"
+                    FontFamily="SignikaSemiBold"
+                    FontSize="13."
+                    HorizontalOptions="Center"
+                    Text="{Binding CopyrightText}"
+                    TextColor="Black" />
+
+            </Grid>
+        </ScrollView>
+        <Grid BackgroundColor="#80000000" IsVisible="{Binding IsBusy}">
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <ActivityIndicator IsRunning="True" Color="White" />
+                <Label
+                    Margin="10,0,0,0"
+                    FontFamily="SignikaRegular"
+                    FontSize="17"
+                    Text="Loading..."
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
         </Grid>
-    </ScrollView>
+    </Grid>
 </ContentPage>
