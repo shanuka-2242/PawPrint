@@ -221,7 +221,7 @@
                     Margin="10,0,0,0"
                     FontFamily="SignikaRegular"
                     FontSize="17"
-                    Text="Loading..."
+                    Text="Signing Up..."
                     TextColor="White"
                     VerticalOptions="Center" />
             </HorizontalStackLayout>
