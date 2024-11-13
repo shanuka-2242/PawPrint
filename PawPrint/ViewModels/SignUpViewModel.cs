@@ -16,9 +16,23 @@ public partial class SignUpViewModel : ObservableObject
     {
         _authenticateService = authenticateService;
         CopyrightText = $"® {DateTime.Now.Year} Paw Print Sri Lanka. All rights reserved";
+        PasswordVisibilityImageSource = ImageSource.FromFile("visibility.png");
+        ConfirmPasswordVisibilityImageSource = ImageSource.FromFile("visibility.png");
     }
 
     #region Required Property List
+
+    [ObservableProperty]
+    private bool isPassword = true;
+
+    [ObservableProperty]
+    ImageSource passwordVisibilityImageSource;
+
+    [ObservableProperty]
+    private bool isConfirmPassword = true;
+
+    [ObservableProperty]
+    ImageSource confirmPasswordVisibilityImageSource;
 
     [ObservableProperty]
     private string copyrightText;
@@ -33,6 +47,46 @@ public partial class SignUpViewModel : ObservableObject
     private bool isBusy;
 
     #endregion
+
+    [RelayCommand]
+    private void VisiblePassword()
+    {
+        try
+        {
+            if (IsPassword)
+            {
+                IsPassword = false;
+                PasswordVisibilityImageSource = ImageSource.FromFile("visibility_off.png");
+            }
+            else
+            {
+                IsPassword = true;
+                PasswordVisibilityImageSource = ImageSource.FromFile("visibility.png");
+            }
+        }
+        catch (Exception)
+        { }
+    }
+
+    [RelayCommand]
+    private void VisibleConfirmPassword()
+    {
+        try
+        {
+            if (IsConfirmPassword)
+            {
+                IsConfirmPassword = false;
+                ConfirmPasswordVisibilityImageSource = ImageSource.FromFile("visibility_off.png");
+            }
+            else
+            {
+                IsConfirmPassword = true;
+                ConfirmPasswordVisibilityImageSource = ImageSource.FromFile("visibility.png");
+            }
+        }
+        catch (Exception)
+        { }
+    }
 
     [RelayCommand]
     async Task GoBack()
