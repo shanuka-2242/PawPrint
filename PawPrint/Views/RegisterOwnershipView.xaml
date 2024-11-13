@@ -228,7 +228,7 @@
                     Margin="10,0,0,0"
                     FontFamily="SignikaRegular"
                     FontSize="17"
-                    Text="In progress..."
+                    Text="In Progress..."
                     TextColor="White"
                     VerticalOptions="Center" />
             </HorizontalStackLayout>
