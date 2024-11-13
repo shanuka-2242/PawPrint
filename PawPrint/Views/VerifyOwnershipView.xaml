@@ -26,7 +26,6 @@
                     Margin="0,15,0,0"
                     Padding="5"
                     BackgroundColor="Transparent"
-                    BorderColor="Gray"
                     CornerRadius="3"
                     HorizontalOptions="Center">
 
@@ -160,7 +159,6 @@
                                 Margin="0,15,0,0"
                                 Padding="5"
                                 BackgroundColor="Transparent"
-                                BorderColor="Gray"
                                 CornerRadius="3">
 
                                 <Image
@@ -206,7 +204,7 @@
                                 Grid.Column="0"
                                 FontFamily="SignikaMedium"
                                 FontSize="16"
-                                Text="NIC" />
+                                Text="NIC No" />
 
                             <Label
                                 Grid.Row="1"
