@@ -69,6 +69,8 @@
 	  <None Remove="Resources\Images\logout.png" />
 	  <None Remove="Resources\Images\remove.png" />
 	  <None Remove="Resources\Images\upload_file.png" />
+	  <None Remove="Resources\Images\visibility.png" />
+	  <None Remove="Resources\Images\visibility_off.png" />
 	</ItemGroup>
 
 	<ItemGroup>

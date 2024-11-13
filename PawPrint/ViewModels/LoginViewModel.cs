@@ -15,9 +15,13 @@ public partial class LoginViewModel : ObservableObject
     {
         CopyrightText = $"® {DateTime.Now.Year} Paw Print Sri Lanka. All rights reserved";
         _authenticateService = authenticateService;
+        PasswordVisibilityImageSource = ImageSource.FromFile("visibility.png");
     }
 
     #region Required Property List
+
+    [ObservableProperty]
+    ImageSource passwordVisibilityImageSource;
 
     [ObservableProperty]
     private string copyrightText;
@@ -31,7 +35,23 @@ public partial class LoginViewModel : ObservableObject
     [ObservableProperty]
     private bool isBusy;
 
+    [ObservableProperty]
+    private bool isPassword = true;
+
     #endregion
+
+    [RelayCommand]
+    private void VisiblePassword()
+    {
+        try
+        {
+
+        }
+        catch (Exception)
+        {
+
+        }
+    }
 
     [RelayCommand]
     async Task GoBack()
