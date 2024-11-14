@@ -45,7 +45,7 @@ public partial class LoginViewModel : ObservableObject
     {
         try
         {
-            if (IsPassword) 
+            if (IsPassword)
             {
                 IsPassword = false;
                 PasswordVisibilityImageSource = ImageSource.FromFile("visibility_off.png");
@@ -57,7 +57,7 @@ public partial class LoginViewModel : ObservableObject
             }
         }
         catch (Exception)
-        {}
+        { }
     }
 
     [RelayCommand]
