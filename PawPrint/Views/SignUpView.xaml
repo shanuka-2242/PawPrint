@@ -21,7 +21,6 @@
                     Grid.Row="0"
                     Padding="15"
                     Spacing="10">
-
                     <ImageButton
                         Margin="10,10,0,0"
                         BackgroundColor="Transparent"
@@ -33,7 +32,6 @@
 
                     <!--  Logo Image  -->
                     <Image
-                        Margin="0,0,0,0"
                         Aspect="AspectFill"
                         HeightRequest="250"
                         HorizontalOptions="Center"
@@ -141,8 +139,8 @@
                         CornerRadius="3">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <local:CustomEntry
@@ -174,8 +172,8 @@
                         CornerRadius="3">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <local:CustomEntry
@@ -212,7 +210,7 @@
                         TextColor="White" />
 
                     <HorizontalStackLayout
-                        Margin="0,0,0,20"
+                        Margin="0,0,0,13"
                         Spacing="10"
                         VerticalOptions="Center">
                         <Label
@@ -232,18 +230,16 @@
                             TextColor="{StaticResource PawPrintGreen}"
                             VerticalOptions="Center" />
                     </HorizontalStackLayout>
-
-                    <!--  All right reserved lable  -->
-                    <Label
-                        Grid.Row="1"
-                        Margin="0,0,0,6"
-                        FontFamily="SignikaSemiBold"
-                        FontSize="13."
-                        HorizontalOptions="Center"
-                        Text="{Binding CopyrightText}"
-                        TextColor="Black" />
-
                 </VerticalStackLayout>
+                <!--  All right reserved lable  -->
+                <Label
+                    Grid.Row="1"
+                    Margin="0,0,0,6"
+                    FontFamily="SignikaSemiBold"
+                    FontSize="13"
+                    HorizontalOptions="Center"
+                    Text="{Binding CopyrightText}"
+                    TextColor="Black" />
             </Grid>
         </ScrollView>
         <Grid BackgroundColor="#80000000" IsVisible="{Binding IsBusy}">

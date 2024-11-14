@@ -33,7 +33,6 @@
 
                     <!--  Logo Image  -->
                     <Image
-                        Margin="0,0,0,0"
                         Aspect="AspectFill"
                         HeightRequest="250"
                         HorizontalOptions="Center"
