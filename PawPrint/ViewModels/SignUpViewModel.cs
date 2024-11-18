@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using PawPrint.Models;
 using PawPrint.Services.AuthenticateService;
 using PawPrint.Views;
+using System.Text.RegularExpressions;
 
 namespace PawPrint.ViewModels;
 
@@ -19,6 +20,15 @@ public partial class SignUpViewModel : ObservableObject
         PasswordVisibilityImageSource = ImageSource.FromFile("visibility.png");
         ConfirmPasswordVisibilityImageSource = ImageSource.FromFile("visibility.png");
     }
+
+    #region Regex Fields
+
+    private string _fullNameRegex = @"^[a-zA-Z]+(?:\s[a-zA-Z.]+)*$";
+    private string _nicRegex = @"^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$";
+    private string _emailRegex = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    private string _phoneRegex = @"^(?:\+94|94|0)?7[0-9]{8}$";
+
+    #endregion
 
     #region Required Property List
 
@@ -102,47 +112,75 @@ public partial class SignUpViewModel : ObservableObject
             if (Owner.NIC != null && Owner.FullName != null && Owner.Phone != null && Owner.Email != null
                 && Owner.CurrentAddress != null && Owner.Password != null && EnteredConfirmPassword != null)
             {
-                var alreadyUser = await _authenticateService.GetOwnerByNICAsync(Owner.NIC);
-                if (alreadyUser == null)
+                if (Regex.IsMatch(Owner.FullName, _fullNameRegex))
                 {
-                    if (EnteredConfirmPassword == Owner.Password)
+                    if (Regex.IsMatch(Owner.NIC, _nicRegex))
                     {
-                        using var form = new MultipartFormDataContent
+                        if (Regex.IsMatch(Owner.Phone, _phoneRegex))
                         {
-                            { new StringContent(Owner.NIC), "nic" },
-                            { new StringContent(Owner.FullName), "full_name" },
-                            { new StringContent(Owner.Phone), "phone" },
-                            { new StringContent(Owner.Email), "email" },
-                            { new StringContent(Owner.CurrentAddress), "current_address" },
-                            { new StringContent(Owner.Password), "password" }
-                        };
-
-                        IsBusy = true;
-                        var result = await _authenticateService.SignUpOwnerAsync(form);
-                        IsBusy = false;
-
-                        if (result)
-                        {
-                            var param = new Dictionary<string, object>
+                            if (Regex.IsMatch(Owner.Email, _emailRegex))
                             {
-                                { "LoggedInUserNIC", Owner.NIC }
-                            };
+                                var alreadyUser = await _authenticateService.GetOwnerByNICAsync(Owner.NIC);
+                                if (alreadyUser == null)
+                                {
+                                    if (EnteredConfirmPassword == Owner.Password)
+                                    {
+                                        using var form = new MultipartFormDataContent
+                                        {
+                                            { new StringContent(Owner.NIC), "nic" },
+                                            { new StringContent(Owner.FullName), "full_name" },
+                                            { new StringContent(Owner.Phone), "phone" },
+                                            { new StringContent(Owner.Email), "email" },
+                                            { new StringContent(Owner.CurrentAddress), "current_address" },
+                                            { new StringContent(Owner.Password), "password" }
+                                        };
 
-                            await Shell.Current.GoToAsync($"//{nameof(RegisterOwnershipView)}", param);
+                                        IsBusy = true;
+                                        var result = await _authenticateService.SignUpOwnerAsync(form);
+                                        IsBusy = false;
+
+                                        if (result)
+                                        {
+                                            var param = new Dictionary<string, object>
+                                            {
+                                                { "LoggedInUserNIC", Owner.NIC }
+                                            };
+
+                                            await Shell.Current.GoToAsync($"//{nameof(RegisterOwnershipView)}", param);
+                                        }
+                                        else
+                                        {
+                                            await Toast.Make("Signing up failed", ToastDuration.Long, 14).Show();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        await Toast.Make("Confirm Password and Password values are not equal to each other", ToastDuration.Long, 14).Show();
+                                    }
+                                }
+                                else
+                                {
+                                    await Toast.Make("An owner already logged in under this NIC number", ToastDuration.Long, 14).Show();
+                                }
+                            }
+                            else
+                            {
+                                await Toast.Make("Entered email address isn't in the proper format", ToastDuration.Long, 14).Show();
+                            }
                         }
                         else
                         {
-                            await Toast.Make("Signing up failed", ToastDuration.Long, 14).Show();
+                            await Toast.Make("Entered phone number isn't in the proper format to be used in Sri Lanka", ToastDuration.Long, 14).Show();
                         }
                     }
                     else
                     {
-                        await Toast.Make("Confirm Password and Password values are not equal to each other", ToastDuration.Long, 14).Show();
+                        await Toast.Make("Entered NIC number isn't in the proper format to be used in Sri Lanka", ToastDuration.Long, 14).Show();
                     }
                 }
                 else
                 {
-                    await Toast.Make("An owner already logged in under this NIC number", ToastDuration.Long, 14).Show();
+                    await Toast.Make("Entered fullname isn't in correct format", ToastDuration.Long, 14).Show();
                 }
             }
             else

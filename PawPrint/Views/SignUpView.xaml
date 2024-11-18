@@ -58,7 +58,7 @@
                         <local:CustomEntry
                             FontFamily="SignikaMedium"
                             FontSize="15"
-                            Placeholder="Owner FullName"
+                            Placeholder="Full Name"
                             PlaceholderColor="DimGray"
                             Text="{Binding Owner.FullName}"
                             TextColor="Black" />

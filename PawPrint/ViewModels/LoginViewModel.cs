@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PawPrint.Services.AuthenticateService;
 using PawPrint.Views;
+using System.Text.RegularExpressions;
 
 namespace PawPrint.ViewModels;
 
@@ -17,6 +18,12 @@ public partial class LoginViewModel : ObservableObject
         _authenticateService = authenticateService;
         PasswordVisibilityImageSource = ImageSource.FromFile("visibility.png");
     }
+
+    #region Regex Fields
+
+    private string _nicRegex = @"^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$";
+
+    #endregion
 
     #region Required Property List
 
@@ -79,29 +86,36 @@ public partial class LoginViewModel : ObservableObject
         {
             if (EnteredNIC != null && EnteredPassword != null)
             {
-                IsBusy = true;
-                var loggedinUser = await _authenticateService.GetOwnerByNICAsync(EnteredNIC);
-                IsBusy = false;
-
-                if (loggedinUser != null)
+                if (Regex.IsMatch(EnteredNIC, _nicRegex))
                 {
-                    if (EnteredPassword == loggedinUser.Password)
+                    IsBusy = true;
+                    var loggedinUser = await _authenticateService.GetOwnerByNICAsync(EnteredNIC);
+                    IsBusy = false;
+
+                    if (loggedinUser != null)
                     {
-                        var param = new Dictionary<string, object>
+                        if (EnteredPassword == loggedinUser.Password)
+                        {
+                            var param = new Dictionary<string, object>
                         {
                             { "LoggedInUserNIC", loggedinUser.NIC }
                         };
 
-                        await Shell.Current.GoToAsync($"//{nameof(RegisterOwnershipView)}", param);
+                            await Shell.Current.GoToAsync($"//{nameof(RegisterOwnershipView)}", param);
+                        }
+                        else
+                        {
+                            await Toast.Make("Entered credentials must be wrong please chack again", ToastDuration.Long, 14).Show();
+                        }
                     }
                     else
                     {
-                        await Toast.Make("Entered credentials must be wrong please chack again", ToastDuration.Long, 14).Show();
+                        await Toast.Make("Entered credentials must be wrong or user doesn't exists", ToastDuration.Long, 14).Show();
                     }
                 }
                 else
                 {
-                    await Toast.Make("Entered credentials must be wrong or user doesn't exists", ToastDuration.Long, 14).Show();
+                    await Toast.Make("Entered NIC number isn't in the proper format to be used in Sri Lanka", ToastDuration.Long, 14).Show();
                 }
             }
             else
