@@ -6,6 +6,7 @@ using PawPrint.Models;
 using PawPrint.Services.RegisterOwnershipService;
 using PawPrint.Views;
 using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
 
 namespace PawPrint.ViewModels;
 
@@ -52,6 +53,13 @@ public partial class RegisterOwnershipViewModel : ObservableObject, IQueryAttrib
 
     [ObservableProperty]
     public bool viewRegisteredDogList;
+
+    #endregion
+
+    #region Regex Fields
+
+    private string _dogNameRegex = @"^[A-Za-z]+(?:[-'\s][A-Za-z]+)*$";
+    private string _dogBreedRegex = @"^[A-Za-z]+(?:[-\s][A-Za-z]+)*$";
 
     #endregion
 
@@ -145,42 +153,56 @@ public partial class RegisterOwnershipViewModel : ObservableObject, IQueryAttrib
         {
             if (Dog.Name != null && Years != null && Months != null && Dog.Breed != null && NoseImage != null && DogImage != null)
             {
-                //Set dog age
-                Dog.Age = $"{Years} Years, {Months} Months";
-                using var form = new MultipartFormDataContent
+                if (Regex.IsMatch(Dog.Name, _dogNameRegex))
                 {
-                    { new StringContent(Dog.Name), "dog_name" },
-                    { new StringContent(Dog.Breed), "breed" },
-                    { new StringContent(Dog.Age), "age" },
-                    { new StringContent(LoggedInUserNIC), "owner_nic" }
-                };
+                    if (Regex.IsMatch(Dog.Breed, _dogBreedRegex))
+                    {
+                        //Set dog age
+                        Dog.Age = $"{Years} Years, {Months} Months";
+                        using var form = new MultipartFormDataContent
+                        {
+                            { new StringContent(Dog.Name), "dog_name" },
+                            { new StringContent(Dog.Breed), "breed" },
+                            { new StringContent(Dog.Age), "age" },
+                            { new StringContent(LoggedInUserNIC), "owner_nic" }
+                        };
 
-                var noseImageContent = new StreamContent(NoseImage);
-                noseImageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
-                form.Add(noseImageContent, "nose_image", NoseImageName);
+                        var noseImageContent = new StreamContent(NoseImage);
+                        noseImageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+                        form.Add(noseImageContent, "nose_image", NoseImageName);
 
-                var dogImageContent = new StreamContent(DogImage);
-                dogImageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
-                form.Add(dogImageContent, "dog_image", DogImageName);
+                        var dogImageContent = new StreamContent(DogImage);
+                        dogImageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+                        form.Add(dogImageContent, "dog_image", DogImageName);
 
-                IsBusy = true;
-                var result = await _registerOwnershipService.RegisterOwnershipAsync(form);
-                IsBusy = false;
+                        IsBusy = true;
+                        var result = await _registerOwnershipService.RegisterOwnershipAsync(form);
+                        IsBusy = false;
 
-                if (result == 200)
-                {
-                    await Toast.Make("Your dog registered into our system sucessfully", ToastDuration.Long, 14).Show();
-                }
-                else if (result == 400)
-                {
-                    await Toast.Make("This dog is already registered in our system", ToastDuration.Long, 14).Show();
+                        if (result == 200)
+                        {
+                            await Toast.Make("Your dog registered into our system sucessfully", ToastDuration.Long, 14).Show();
+                        }
+                        else if (result == 400)
+                        {
+                            await Toast.Make("This dog is already registered in our system", ToastDuration.Long, 14).Show();
+                        }
+                        else
+                        {
+                            await Toast.Make("Error occured while registering the dog", ToastDuration.Long, 14).Show();
+                        }
+                        await LoadDataAsync();
+                        ClearFields();
+                    }
+                    else
+                    {
+                        await Toast.Make("Dog's Breed isn't in correct format", ToastDuration.Long, 14).Show();
+                    }
                 }
                 else
                 {
-                    await Toast.Make("Error occured while registering the dog", ToastDuration.Long, 14).Show();
+                    await Toast.Make("Dog's Name isn't in correct format", ToastDuration.Long, 14).Show();
                 }
-                await LoadDataAsync();
-                ClearFields();
             }
             else
             {
